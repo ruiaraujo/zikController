@@ -1,0 +1,419 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BBB648E019C4D1DB006A8D5B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BBB648DF19C4D1DB006A8D5B /* main.m */; };
+		BBB648E319C4D1DB006A8D5B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBB648E219C4D1DB006A8D5B /* ViewController.m */; };
+		BBB648E619C4D1DB006A8D5B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BBB648E519C4D1DB006A8D5B /* AppDelegate.m */; };
+		BBB648E819C4D1DB006A8D5B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BBB648E719C4D1DB006A8D5B /* Images.xcassets */; };
+		BBB648EB19C4D1DB006A8D5B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBB648E919C4D1DB006A8D5B /* Main.storyboard */; };
+		BBB648F719C4D1DB006A8D5B /* Zik_ControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BBB648F619C4D1DB006A8D5B /* Zik_ControllerTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		BBB648F119C4D1DB006A8D5B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BBB648D219C4D1DB006A8D5B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BBB648D919C4D1DB006A8D5B;
+			remoteInfo = "Zik Controller";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		BBB648DA19C4D1DB006A8D5B /* Zik Controller.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Zik Controller.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BBB648DE19C4D1DB006A8D5B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BBB648DF19C4D1DB006A8D5B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		BBB648E119C4D1DB006A8D5B /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		BBB648E219C4D1DB006A8D5B /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		BBB648E419C4D1DB006A8D5B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		BBB648E519C4D1DB006A8D5B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		BBB648E719C4D1DB006A8D5B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		BBB648EA19C4D1DB006A8D5B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		BBB648F019C4D1DB006A8D5B /* Zik ControllerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Zik ControllerTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BBB648F519C4D1DB006A8D5B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BBB648F619C4D1DB006A8D5B /* Zik_ControllerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Zik_ControllerTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BBB648D719C4D1DB006A8D5B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BBB648ED19C4D1DB006A8D5B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		BBB648D119C4D1DB006A8D5B = {
+			isa = PBXGroup;
+			children = (
+				BBB648DC19C4D1DB006A8D5B /* Zik Controller */,
+				BBB648F319C4D1DB006A8D5B /* Zik ControllerTests */,
+				BBB648DB19C4D1DB006A8D5B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		BBB648DB19C4D1DB006A8D5B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BBB648DA19C4D1DB006A8D5B /* Zik Controller.app */,
+				BBB648F019C4D1DB006A8D5B /* Zik ControllerTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BBB648DC19C4D1DB006A8D5B /* Zik Controller */ = {
+			isa = PBXGroup;
+			children = (
+				BBB648E119C4D1DB006A8D5B /* ViewController.h */,
+				BBB648E219C4D1DB006A8D5B /* ViewController.m */,
+				BBB648E419C4D1DB006A8D5B /* AppDelegate.h */,
+				BBB648E519C4D1DB006A8D5B /* AppDelegate.m */,
+				BBB648E719C4D1DB006A8D5B /* Images.xcassets */,
+				BBB648E919C4D1DB006A8D5B /* Main.storyboard */,
+				BBB648DD19C4D1DB006A8D5B /* Supporting Files */,
+			);
+			path = "Zik Controller";
+			sourceTree = "<group>";
+		};
+		BBB648DD19C4D1DB006A8D5B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				BBB648DE19C4D1DB006A8D5B /* Info.plist */,
+				BBB648DF19C4D1DB006A8D5B /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		BBB648F319C4D1DB006A8D5B /* Zik ControllerTests */ = {
+			isa = PBXGroup;
+			children = (
+				BBB648F619C4D1DB006A8D5B /* Zik_ControllerTests.m */,
+				BBB648F419C4D1DB006A8D5B /* Supporting Files */,
+			);
+			path = "Zik ControllerTests";
+			sourceTree = "<group>";
+		};
+		BBB648F419C4D1DB006A8D5B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				BBB648F519C4D1DB006A8D5B /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		BBB648D919C4D1DB006A8D5B /* Zik Controller */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BBB648FA19C4D1DB006A8D5B /* Build configuration list for PBXNativeTarget "Zik Controller" */;
+			buildPhases = (
+				BBB648D619C4D1DB006A8D5B /* Sources */,
+				BBB648D719C4D1DB006A8D5B /* Frameworks */,
+				BBB648D819C4D1DB006A8D5B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Zik Controller";
+			productName = "Zik Controller";
+			productReference = BBB648DA19C4D1DB006A8D5B /* Zik Controller.app */;
+			productType = "com.apple.product-type.application";
+		};
+		BBB648EF19C4D1DB006A8D5B /* Zik ControllerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BBB648FD19C4D1DB006A8D5B /* Build configuration list for PBXNativeTarget "Zik ControllerTests" */;
+			buildPhases = (
+				BBB648EC19C4D1DB006A8D5B /* Sources */,
+				BBB648ED19C4D1DB006A8D5B /* Frameworks */,
+				BBB648EE19C4D1DB006A8D5B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BBB648F219C4D1DB006A8D5B /* PBXTargetDependency */,
+			);
+			name = "Zik ControllerTests";
+			productName = "Zik ControllerTests";
+			productReference = BBB648F019C4D1DB006A8D5B /* Zik ControllerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BBB648D219C4D1DB006A8D5B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0600;
+				ORGANIZATIONNAME = "Rui Araújo";
+				TargetAttributes = {
+					BBB648D919C4D1DB006A8D5B = {
+						CreatedOnToolsVersion = 6.0;
+					};
+					BBB648EF19C4D1DB006A8D5B = {
+						CreatedOnToolsVersion = 6.0;
+						TestTargetID = BBB648D919C4D1DB006A8D5B;
+					};
+				};
+			};
+			buildConfigurationList = BBB648D519C4D1DB006A8D5B /* Build configuration list for PBXProject "Zik Controller" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = BBB648D119C4D1DB006A8D5B;
+			productRefGroup = BBB648DB19C4D1DB006A8D5B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BBB648D919C4D1DB006A8D5B /* Zik Controller */,
+				BBB648EF19C4D1DB006A8D5B /* Zik ControllerTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BBB648D819C4D1DB006A8D5B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BBB648E819C4D1DB006A8D5B /* Images.xcassets in Resources */,
+				BBB648EB19C4D1DB006A8D5B /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BBB648EE19C4D1DB006A8D5B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BBB648D619C4D1DB006A8D5B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BBB648E319C4D1DB006A8D5B /* ViewController.m in Sources */,
+				BBB648E019C4D1DB006A8D5B /* main.m in Sources */,
+				BBB648E619C4D1DB006A8D5B /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BBB648EC19C4D1DB006A8D5B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BBB648F719C4D1DB006A8D5B /* Zik_ControllerTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		BBB648F219C4D1DB006A8D5B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BBB648D919C4D1DB006A8D5B /* Zik Controller */;
+			targetProxy = BBB648F119C4D1DB006A8D5B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		BBB648E919C4D1DB006A8D5B /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BBB648EA19C4D1DB006A8D5B /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		BBB648F819C4D1DB006A8D5B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		BBB648F919C4D1DB006A8D5B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		BBB648FB19C4D1DB006A8D5B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "Zik Controller/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		BBB648FC19C4D1DB006A8D5B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "Zik Controller/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		BBB648FE19C4D1DB006A8D5B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Zik ControllerTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Zik Controller.app/Contents/MacOS/Zik Controller";
+			};
+			name = Debug;
+		};
+		BBB648FF19C4D1DB006A8D5B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Zik ControllerTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Zik Controller.app/Contents/MacOS/Zik Controller";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BBB648D519C4D1DB006A8D5B /* Build configuration list for PBXProject "Zik Controller" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BBB648F819C4D1DB006A8D5B /* Debug */,
+				BBB648F919C4D1DB006A8D5B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BBB648FA19C4D1DB006A8D5B /* Build configuration list for PBXNativeTarget "Zik Controller" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BBB648FB19C4D1DB006A8D5B /* Debug */,
+				BBB648FC19C4D1DB006A8D5B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		BBB648FD19C4D1DB006A8D5B /* Build configuration list for PBXNativeTarget "Zik ControllerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BBB648FE19C4D1DB006A8D5B /* Debug */,
+				BBB648FF19C4D1DB006A8D5B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BBB648D219C4D1DB006A8D5B /* Project object */;
+}
