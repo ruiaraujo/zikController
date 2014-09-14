@@ -34,7 +34,9 @@
 - (void)setupMenu
 {
     NSMenu *menu = [[NSMenu alloc] init];
+    [menu setAutoenablesItems:NO];
     _connectStatus = [menu addItemWithTitle:@"Connection: Disconnected" action:nil keyEquivalent:@""];
+    [_connectStatus setEnabled:NO];
     if ([_zikInterface searchForZikInConnectedDevices]) {
         _connectItem = [menu addItemWithTitle:@"Connecting..." action:nil keyEquivalent:@""];
     } else {
@@ -43,6 +45,11 @@
     }
     [menu addItem:[NSMenuItem separatorItem]];
     _batteryStatus = [menu addItemWithTitle:@"Zik Status" action:nil keyEquivalent:@""];
+    [_batteryStatus setEnabled:NO];
+    _LouReedModeItem = [menu addItemWithTitle:@"Tuned by Lou Reed" action:@selector(toggleLouReedMode:) keyEquivalent:@""];
+    _ANCItem = [menu addItemWithTitle:@"Noise Cancellation" action:@selector(toggleANCMode:) keyEquivalent:@""];
+    _ConcertHallEffectItem =[menu addItemWithTitle:@"Concert Hall Effect" action:@selector(toggleConcertHallEffect:) keyEquivalent:@""];
+    _EquItem =[menu addItemWithTitle:@"Equalizer" action:@selector(toggleEqualizer:) keyEquivalent:@""];
     [menu addItem:[NSMenuItem separatorItem]];
     [menu addItemWithTitle:@"Quit Zik Controller" action:@selector(terminate:) keyEquivalent:@""];
     self.statusItem.menu = menu;
@@ -58,9 +65,9 @@
         [_connectItem setEnabled:YES];
     } else {
         [_connectStatus setTitle:@"Connection: Connecting..."];
-        
     }
 }
+
 - (void)disconnect:(id)sender
 {
     [_connectStatus setTitle:@"Connection: Disconnected"];
@@ -69,7 +76,6 @@
     [self.zikInterface disconnectFromZik];
     [_connectItem setTitle:@"Connect"];
     [_connectItem setAction:@selector(connect:)];
-    
 }
 
 - (void)terminate:(id)sender
@@ -84,7 +90,7 @@
         _statusItem.toolTip = @"Zik Controller: Connected";
         [_connectItem setTitle:@"Disconnect"];
         [_connectItem setAction:@selector(disconnect:)];
-        [_zikInterface updateBatteryStatus];
+        [_zikInterface refreshZikStatus];
     } else {
         [_connectStatus setTitle:@"Connection: Disconnected"];
         _statusItem.toolTip = @"Zik Controller: Disconnected";
@@ -96,9 +102,60 @@
 
 }
 
-- (void)updateBatteryStatus:(NSTimer *)timer
+-(void)LouReedModeState:(OptionStatus)status
 {
-    [_zikInterface updateBatteryStatus];
+    if (status == ON || status == INVALID_ON) {
+        [_LouReedModeItem setState:YES];
+    } else {
+        [_LouReedModeItem setState:NO];
+    }
+    if (status == INVALID_OFF || status == INVALID_ON) {
+        [_LouReedModeItem setEnabled:NO];
+    } else {
+        [_LouReedModeItem setEnabled:YES];
+    }
+}
+
+-(void)ActiveNoiseCancellationState:(OptionStatus)status
+{
+    if (status == ON || status == INVALID_ON) {
+        [_ANCItem setState:YES];
+    } else {
+        [_ANCItem setState:NO];
+    }
+    if (status == INVALID_OFF || status == INVALID_ON) {
+        [_ANCItem setEnabled:NO];
+    } else {
+        [_ANCItem setEnabled:YES];
+    }
+}
+
+-(void)ConcertHallEffectState:(OptionStatus)status
+{
+    if (status == ON || status == INVALID_ON) {
+        [_ConcertHallEffectItem setState:YES];
+    } else {
+        [_ConcertHallEffectItem setState:NO];
+    }
+    if (status == INVALID_OFF || status == INVALID_ON) {
+        [_ConcertHallEffectItem setEnabled:NO];
+    } else {
+        [_ConcertHallEffectItem setEnabled:YES];
+    }
+}
+
+-(void)EqualizerState:(OptionStatus)status;
+{
+    if (status == ON || status == INVALID_ON) {
+        [_EquItem setState:YES];
+    } else {
+        [_EquItem setState:NO];
+    }
+    if (status == INVALID_OFF || status == INVALID_ON) {
+        [_EquItem setEnabled:NO];
+    } else {
+        [_EquItem setEnabled:YES];
+    }
 }
 
 
@@ -111,5 +168,46 @@
     }
 }
 
+-(void)toggleLouReedMode:(id)sender
+{
+    if ([_LouReedModeItem state] == YES) {
+        [_LouReedModeItem setState:NO];
+    } else {
+        [_LouReedModeItem setState:YES];
+    }
+    [_zikInterface setLouReedModeState:[_LouReedModeItem state] == YES];
+    [_zikInterface refreshZikStatus];
+}
+
+
+-(void)toggleANCMode:(id)sender
+{
+    if ([_ANCItem state] == YES) {
+        [_ANCItem setState:NO];
+    } else {
+        [_ANCItem setState:YES];
+    }
+    [_zikInterface setActiveNoiseCancellationState:[_ANCItem state] == YES];
+}
+
+-(void)toggleConcertHallEffect:(id)sender
+{
+    if ([_ConcertHallEffectItem state] == YES) {
+        [_ConcertHallEffectItem setState:NO];
+    } else {
+        [_ConcertHallEffectItem setState:YES];
+    }
+    [_zikInterface setConcertHallState:[_ConcertHallEffectItem state] == YES];
+}
+
+-(void)toggleEqualizer:(id)sender
+{
+    if ([_EquItem state] == YES) {
+        [_EquItem setState:NO];
+    } else {
+        [_EquItem setState:YES];
+    }
+    [_zikInterface setEqualizerState:[_EquItem state] == YES];
+}
 
 @end

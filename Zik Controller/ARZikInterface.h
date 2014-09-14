@@ -16,9 +16,21 @@ typedef NS_ENUM(NSInteger, ConnectionStatus) {
     CONNECTED
 };
 
+
+typedef NS_ENUM(NSInteger, OptionStatus) {
+    ON,
+    OFF,
+    INVALID_OFF,
+    INVALID_ON
+};
+
 @protocol ARBluetoothDelegate
-- (void)zikConnectionComplete:(IOReturn)error;
-- (void)newBatteryStatus:(BOOL)charging :(NSInteger)level;
+-(void)zikConnectionComplete:(IOReturn)error;
+-(void)newBatteryStatus:(BOOL)charging :(NSInteger)level;
+-(void)LouReedModeState:(OptionStatus)status;
+-(void)ActiveNoiseCancellationState:(OptionStatus)status;
+-(void)ConcertHallEffectState:(OptionStatus)status;
+-(void)EqualizerState:(OptionStatus)status;
 @end
 
 @interface ARZikInterface : NSObject<IOBluetoothRFCOMMChannelDelegate> {
@@ -43,6 +55,14 @@ typedef NS_ENUM(NSInteger, ConnectionStatus) {
 // closes the channel:
 - (void)disconnectFromZik;
 
--(void)updateBatteryStatus;
+-(void)refreshZikStatus;
+
+
+//Functions to toggle the main functions
+-(void)setLouReedModeState:(BOOL)enabled;
+-(void)setActiveNoiseCancellationState:(BOOL)enabled;
+-(void)setConcertHallState:(BOOL)enabled;
+-(void)setEqualizerState:(BOOL)enabled;
+
 
 @end

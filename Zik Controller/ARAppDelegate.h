@@ -15,7 +15,10 @@
 @property (strong, nonatomic) NSMenuItem *connectStatus;
 @property (strong, nonatomic) NSMenuItem *connectItem;
 @property (strong, nonatomic) NSMenuItem *batteryStatus;
-//@property (strong, nonatomic) NSTimer *batteryTimer;
+@property (strong, nonatomic) NSMenuItem *LouReedModeItem;
+@property (strong, nonatomic) NSMenuItem *ANCItem;
+@property (strong, nonatomic) NSMenuItem *EquItem;
+@property (strong, nonatomic) NSMenuItem *ConcertHallEffectItem;
 @property (strong, nonatomic) ARZikInterface *zikInterface;
 
 @end

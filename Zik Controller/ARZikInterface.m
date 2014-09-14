@@ -199,6 +199,7 @@ void newDevice(void * refCon, IOBluetoothUserNotificationRef inRef, IOBluetoothO
         // This signals to the system that we are done with the baseband connection to the device.  If no other
         // channels are open, it will immediately close the baseband connection.
         [device closeConnection];
+        connectionStatus = DISCONNECTED;
     }
 }
 
@@ -245,9 +246,63 @@ void newDevice(void * refCon, IOBluetoothUserNotificationRef inRef, IOBluetoothO
 }
 
 
--(void)updateBatteryStatus
+-(void)refreshZikStatus
 {
-    [self ZikRequest:BatteryAPI :nil];
+    [self ZikRequest:BATTERY_GET :nil];
+    [self ZikRequest:SOUND_EFFECT_ENABLED_GET :nil];
+    [self ZikRequest:EQUALIZER_ENABLED_GET :nil];
+    [self ZikRequest:NOISE_CANCELLATION_ENABLED_GET :nil];
+    [self ZikRequest:CONCERT_HALL_ENABLED_GET :nil];
+}
+
+-(void)setLouReedModeState:(BOOL)enabled
+{
+    if (enabled) {
+        [self ZikRequest:SOUND_EFFECT_ENABLED_SET :@"true"];
+    } else {
+        [self ZikRequest:SOUND_EFFECT_ENABLED_SET :@"false"];
+    }
+}
+
+-(void)setActiveNoiseCancellationState:(BOOL)enabled
+{
+    if (enabled) {
+        [self ZikRequest:NOISE_CANCELLATION_ENABLED_SET :@"true"];
+    } else {
+        [self ZikRequest:NOISE_CANCELLATION_ENABLED_SET :@"false"];
+    }
+}
+
+-(void)setConcertHallState:(BOOL)enabled
+{
+    if (enabled) {
+        [self ZikRequest:CONCERT_HALL_ENABLED_SET :@"true"];
+    } else {
+        [self ZikRequest:CONCERT_HALL_ENABLED_SET :@"false"];
+    }
+}
+
+-(void)setEqualizerState:(BOOL)enabled
+{
+    if (enabled) {
+        [self ZikRequest:EQUALIZER_ENABLED_SET :@"true"];
+    } else {
+        [self ZikRequest:EQUALIZER_ENABLED_SET :@"false"];
+    }
+    
+}
+
+-(OptionStatus)convertStatus:(NSString*)status
+{
+    if ([status isEqualToString:@"true"]){
+        return ON;
+    } else if ([status isEqualToString:@"invalid_on"]){
+        return INVALID_ON;
+    }else if ([status isEqualToString:@"invalid_off"]){
+        return INVALID_OFF;
+    }else {
+        return OFF;
+    }
 }
 
 
@@ -273,7 +328,9 @@ void newDevice(void * refCon, IOBluetoothUserNotificationRef inRef, IOBluetoothO
     if ( dataLength < REPLY_HEADER_COUNT){
         return;
     }
+    
     NSString *reply = [NSString stringWithCString:dataPointer+REPLY_HEADER_COUNT encoding:NSASCIIStringEncoding];
+    NSLog(@"%@\n", reply);
     NSError *error;
     TBXML * tbxml = [TBXML tbxmlWithXMLString:reply error:&error];
     if (error) {
@@ -288,7 +345,7 @@ void newDevice(void * refCon, IOBluetoothUserNotificationRef inRef, IOBluetoothO
         }
         return;
     }
-    if ( [path isEqualToString:BatteryAPI] ){
+    if ( [path isEqualToString:BATTERY_GET] ){
         TBXMLElement *battery = [TBXML childElementNamed:@"battery" parentElement:[TBXML childElementNamed:@"system" parentElement:tbxml.rootXMLElement]];
         NSString *status= [TBXML valueOfAttributeNamed:@"state" forElement:battery];
         BOOL charging = [status isEqualToString:@"charging"];
@@ -297,14 +354,31 @@ void newDevice(void * refCon, IOBluetoothUserNotificationRef inRef, IOBluetoothO
             level = [[TBXML valueOfAttributeNamed:@"level" forElement:battery] integerValue];
         }
         [delegate newBatteryStatus:charging :level];
+    } else if ( [path isEqualToString:SOUND_EFFECT_ENABLED_GET] ){
+        TBXMLElement *battery = [TBXML childElementNamed:@"specific_mode" parentElement:[TBXML childElementNamed:@"audio" parentElement:tbxml.rootXMLElement]];
+        NSString *status= [TBXML valueOfAttributeNamed:@"enabled" forElement:battery];
+        [delegate LouReedModeState:[self convertStatus:status]];
+    } else if ( [path isEqualToString:NOISE_CANCELLATION_ENABLED_GET] ){
+        TBXMLElement *battery = [TBXML childElementNamed:@"noise_cancellation" parentElement:[TBXML childElementNamed:@"audio" parentElement:tbxml.rootXMLElement]];
+        NSString *status= [TBXML valueOfAttributeNamed:@"enabled" forElement:battery];
+        [delegate ActiveNoiseCancellationState:[self convertStatus:status]];
+    } else if ( [path isEqualToString:CONCERT_HALL_ENABLED_GET] ){
+        TBXMLElement *battery = [TBXML childElementNamed:@"sound_effect" parentElement:[TBXML childElementNamed:@"audio" parentElement:tbxml.rootXMLElement]];
+        NSString *status= [TBXML valueOfAttributeNamed:@"enabled" forElement:battery];
+        [delegate ConcertHallEffectState:[self convertStatus:status]];
+    } else if ( [path isEqualToString:EQUALIZER_ENABLED_GET] ){
+        TBXMLElement *battery = [TBXML childElementNamed:@"equalizer" parentElement:[TBXML childElementNamed:@"audio" parentElement:tbxml.rootXMLElement]];
+        NSString *status= [TBXML valueOfAttributeNamed:@"enabled" forElement:battery];
+        [delegate EqualizerState:[self convertStatus:status]];
     }
     
 }
 
 - (void)rfcommChannelClosed:(IOBluetoothRFCOMMChannel*)rfcommChannel;
 {
-    [delegate zikConnectionComplete:kIOReturnError];
     connectionStatus = DISCONNECTED;
+    _mRFCOMMChannel = nil;
+    [delegate zikConnectionComplete:kIOReturnError];
 }
 
 -(void)connectionComplete:(IOReturn)status{
