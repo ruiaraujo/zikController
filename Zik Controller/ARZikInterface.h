@@ -24,13 +24,37 @@ typedef NS_ENUM(NSInteger, OptionStatus) {
     INVALID_ON
 };
 
+
+typedef NS_ENUM(NSInteger, RoomSize) {
+    SILENT_ROOM,
+    LIVING_ROOM,
+    JAZZ_ROOM,
+    CONCERT_HALL
+};
+
+
+typedef NS_ENUM(NSInteger, AngleEffect) {
+    DEGREES_180,
+    DEGREES_150,
+    DEGREES_120,
+    DEGREES_90,
+    DEGREES_60,
+    DEGREES_30,
+};
+
+
 @protocol ARBluetoothDelegate
 -(void)zikConnectionComplete:(IOReturn)error;
 -(void)newBatteryStatus:(BOOL)charging :(NSInteger)level;
 -(void)LouReedModeState:(OptionStatus)status;
 -(void)ActiveNoiseCancellationState:(OptionStatus)status;
 -(void)ConcertHallEffectState:(OptionStatus)status;
+-(void)ConcertHallEffectState:(OptionStatus)status :(RoomSize)room :(AngleEffect)angle;
+-(void)ConcertHallEffectRoomSize:(RoomSize)room;
+-(void)ConcertHallEffectAngle:(AngleEffect)angle;
 -(void)EqualizerState:(OptionStatus)status;
+-(void)EqualizerState:(OptionStatus)status :(NSUInteger)preset;
+-(void)EqualizerPreset:(NSUInteger)preset;
 @end
 
 @interface ARZikInterface : NSObject<IOBluetoothRFCOMMChannelDelegate> {
@@ -59,10 +83,17 @@ typedef NS_ENUM(NSInteger, OptionStatus) {
 
 
 //Functions to toggle the main functions
--(void)setLouReedModeState:(BOOL)enabled;
--(void)setActiveNoiseCancellationState:(BOOL)enabled;
--(void)setConcertHallState:(BOOL)enabled;
--(void)setEqualizerState:(BOOL)enabled;
+-(BOOL)setLouReedModeState:(BOOL)enabled;
+-(BOOL)setActiveNoiseCancellationState:(BOOL)enabled;
+-(BOOL)setConcertHallState:(BOOL)enabled;
+-(BOOL)setEqualizerState:(BOOL)enabled;
+
+//Configurations of the Concert Hall effect
+-(BOOL)setConcertHallRoomSize:(RoomSize)room;
+-(BOOL)setConcertHallAngle:(AngleEffect)angle;
+
+
+-(BOOL)setEqualizerPreset:(NSUInteger)preset;
 
 
 @end

@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		A51EE4EB3E1D4399BB0C3F2E /* libPods-Zik Controller.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E1F843DA8907426E9F5BC25B /* libPods-Zik Controller.a */; };
+		BB008C3319C63A010079CFB7 /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB008C3219C63A010079CFB7 /* ServiceManagement.framework */; };
+		BB008C3619C640CA0079CFB7 /* StartAtLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB008C3519C640CA0079CFB7 /* StartAtLoginController.m */; };
+		BB17D6A119C6686F0039AC85 /* HelperApp.app in Copy Helper App */ = {isa = PBXBuildFile; fileRef = BB17D69D19C667FC0039AC85 /* HelperApp.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		BB9280F519C4E20000FAED16 /* ARZikInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = BB9280F419C4E20000FAED16 /* ARZikInterface.m */; };
 		BB9280F819C507FB00FAED16 /* ZikApi.m in Sources */ = {isa = PBXBuildFile; fileRef = BB9280F719C507FB00FAED16 /* ZikApi.m */; };
 		BBB648E019C4D1DB006A8D5B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BBB648DF19C4D1DB006A8D5B /* main.m */; };
@@ -18,6 +21,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		BB17D69C19C667FC0039AC85 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BB17D69719C667FB0039AC85 /* HelperApp.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BB17D67419C667FB0039AC85;
+			remoteInfo = HelperApp;
+		};
+		BB17D69E19C667FC0039AC85 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BB17D69719C667FB0039AC85 /* HelperApp.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BB17D68719C667FB0039AC85;
+			remoteInfo = HelperAppTests;
+		};
 		BBB648F119C4D1DB006A8D5B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BBB648D219C4D1DB006A8D5B /* Project object */;
@@ -27,7 +44,25 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		BB008C6C19C64E660079CFB7 /* Copy Helper App */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = Contents/Library/LoginItems;
+			dstSubfolderSpec = 1;
+			files = (
+				BB17D6A119C6686F0039AC85 /* HelperApp.app in Copy Helper App */,
+			);
+			name = "Copy Helper App";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		BB008C3219C63A010079CFB7 /* ServiceManagement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ServiceManagement.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/ServiceManagement.framework; sourceTree = DEVELOPER_DIR; };
+		BB008C3419C640CA0079CFB7 /* StartAtLoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartAtLoginController.h; sourceTree = "<group>"; };
+		BB008C3519C640CA0079CFB7 /* StartAtLoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartAtLoginController.m; sourceTree = "<group>"; };
+		BB17D69719C667FB0039AC85 /* HelperApp.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = HelperApp.xcodeproj; path = HelperApp/HelperApp.xcodeproj; sourceTree = "<group>"; };
 		BB9280F219C4D90E00FAED16 /* Zik Controller.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Zik Controller.entitlements"; sourceTree = "<group>"; };
 		BB9280F319C4E20000FAED16 /* ARZikInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARZikInterface.h; sourceTree = "<group>"; };
 		BB9280F419C4E20000FAED16 /* ARZikInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARZikInterface.m; sourceTree = "<group>"; };
@@ -52,6 +87,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB008C3319C63A010079CFB7 /* ServiceManagement.framework in Frameworks */,
 				A51EE4EB3E1D4399BB0C3F2E /* libPods-Zik Controller.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -66,9 +102,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BB17D69819C667FB0039AC85 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BB17D69D19C667FC0039AC85 /* HelperApp.app */,
+				BB17D69F19C667FC0039AC85 /* HelperAppTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		BBB648D119C4D1DB006A8D5B = {
 			isa = PBXGroup;
 			children = (
+				BB17D69719C667FB0039AC85 /* HelperApp.xcodeproj */,
 				BBB648DC19C4D1DB006A8D5B /* Zik Controller */,
 				BBB648F319C4D1DB006A8D5B /* Zik ControllerTests */,
 				BBB648DB19C4D1DB006A8D5B /* Products */,
@@ -89,16 +135,18 @@
 		BBB648DC19C4D1DB006A8D5B /* Zik Controller */ = {
 			isa = PBXGroup;
 			children = (
-				BB9280F619C507FB00FAED16 /* ZikApi.h */,
-				BB9280F719C507FB00FAED16 /* ZikApi.m */,
-				BB9280F219C4D90E00FAED16 /* Zik Controller.entitlements */,
 				BBB648E419C4D1DB006A8D5B /* ARAppDelegate.h */,
 				BBB648E519C4D1DB006A8D5B /* ARAppDelegate.m */,
-				BBB648E719C4D1DB006A8D5B /* Images.xcassets */,
-				BBB648E919C4D1DB006A8D5B /* Main.storyboard */,
-				BBB648DD19C4D1DB006A8D5B /* Supporting Files */,
 				BB9280F319C4E20000FAED16 /* ARZikInterface.h */,
 				BB9280F419C4E20000FAED16 /* ARZikInterface.m */,
+				BBB648E719C4D1DB006A8D5B /* Images.xcassets */,
+				BBB648E919C4D1DB006A8D5B /* Main.storyboard */,
+				BB008C3419C640CA0079CFB7 /* StartAtLoginController.h */,
+				BB008C3519C640CA0079CFB7 /* StartAtLoginController.m */,
+				BBB648DD19C4D1DB006A8D5B /* Supporting Files */,
+				BB9280F219C4D90E00FAED16 /* Zik Controller.entitlements */,
+				BB9280F619C507FB00FAED16 /* ZikApi.h */,
+				BB9280F719C507FB00FAED16 /* ZikApi.m */,
 			);
 			path = "Zik Controller";
 			sourceTree = "<group>";
@@ -132,6 +180,7 @@
 		F3AA8764922A4E8488B30291 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BB008C3219C63A010079CFB7 /* ServiceManagement.framework */,
 				E1F843DA8907426E9F5BC25B /* libPods-Zik Controller.a */,
 			);
 			name = Frameworks;
@@ -149,6 +198,7 @@
 				BBB648D719C4D1DB006A8D5B /* Frameworks */,
 				BBB648D819C4D1DB006A8D5B /* Resources */,
 				15686CB90D5D4F60B01564D2 /* Copy Pods Resources */,
+				BB008C6C19C64E660079CFB7 /* Copy Helper App */,
 			);
 			buildRules = (
 			);
@@ -183,11 +233,13 @@
 		BBB648D219C4D1DB006A8D5B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = AR;
 				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = "Rui Araújo";
 				TargetAttributes = {
 					BBB648D919C4D1DB006A8D5B = {
 						CreatedOnToolsVersion = 6.0;
+						DevelopmentTeam = 2V675NAKZP;
 						SystemCapabilities = {
 							com.apple.Sandbox = {
 								enabled = 1;
@@ -211,6 +263,12 @@
 			mainGroup = BBB648D119C4D1DB006A8D5B;
 			productRefGroup = BBB648DB19C4D1DB006A8D5B /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = BB17D69819C667FB0039AC85 /* Products */;
+					ProjectRef = BB17D69719C667FB0039AC85 /* HelperApp.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				BBB648D919C4D1DB006A8D5B /* Zik Controller */,
@@ -218,6 +276,23 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		BB17D69D19C667FC0039AC85 /* HelperApp.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = HelperApp.app;
+			remoteRef = BB17D69C19C667FC0039AC85 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		BB17D69F19C667FC0039AC85 /* HelperAppTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = HelperAppTests.xctest;
+			remoteRef = BB17D69E19C667FC0039AC85 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		BBB648D819C4D1DB006A8D5B /* Resources */ = {
@@ -279,6 +354,7 @@
 				BB9280F519C4E20000FAED16 /* ARZikInterface.m in Sources */,
 				BBB648E019C4D1DB006A8D5B /* main.m in Sources */,
 				BBB648E619C4D1DB006A8D5B /* ARAppDelegate.m in Sources */,
+				BB008C3619C640CA0079CFB7 /* StartAtLoginController.m in Sources */,
 				BB9280F819C507FB00FAED16 /* ZikApi.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -396,9 +472,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Zik Controller/Zik Controller.entitlements";
 				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				INFOPLIST_FILE = "Zik Controller/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx10.9;
 			};
 			name = Debug;
 		};
@@ -409,9 +488,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Zik Controller/Zik Controller.entitlements";
 				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = "Zik Controller/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx10.9;
 			};
 			name = Release;
 		};
