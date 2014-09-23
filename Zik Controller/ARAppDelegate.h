@@ -10,9 +10,11 @@
 #import "ARZikInterface.h"
 
 @class StartAtLoginController;
+@class ARPreferences;
 
-@interface ARAppDelegate : NSObject <NSApplicationDelegate, ARBluetoothDelegate, NSUserNotificationCenterDelegate> {
+@interface ARAppDelegate : NSObject <NSApplicationDelegate, ARZikStatusObserver, NSUserNotificationCenterDelegate> {
     StartAtLoginController *loginController;
+    ARPreferences *preferenceWindow;
 }
 
 @property (strong, nonatomic) NSStatusItem *statusItem;

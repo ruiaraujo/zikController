@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Rui Araújo. All rights reserved.
 //
 
-#import "ZikApi.h"
+#import "ARZikApi.h"
 
 NSString *const BATTERY_GET = @"/api/system/battery/get";
 NSString *const VERSION_GET = @"/api/software/version/get";

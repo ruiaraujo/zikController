@@ -20,7 +20,8 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     _zikInterface = [[ARZikInterface alloc] init];
-    _zikInterface.delegate = self;
+    //_zikInterface.delegate = self;
+    [_zikInterface addObserver:self];
     //loginController = [[StartAtLoginController alloc] initWithIdentifier:@"com.doublecheck.zikcontroller.HelperApp"];
     [self setupStatusItem];
     [[NSUserNotificationCenter defaultUserNotificationCenter] setDelegate:self];
@@ -52,8 +53,8 @@
         _connectItem = [menu addItemWithTitle:@"Connecting..." action:nil keyEquivalent:@""];
     } else {
         _connectItem = [menu addItemWithTitle:@"Connect" action:@selector(connect:) keyEquivalent:@""];
-        [_zikInterface registerForNewDevices];
     }
+    [_zikInterface registerForNewDevices];
     [menu addItem:[NSMenuItem separatorItem]];
     _batteryStatus = [menu addItemWithTitle:@"Zik Status" action:nil keyEquivalent:@""];
     [_batteryStatus setEnabled:NO];
@@ -132,7 +133,7 @@
     [[NSApplication sharedApplication] terminate:self.statusItem.menu];
 }
 
-- (void)zikConnectionComplete:(IOReturn)status
+- (void)newZikConnectionStatus:(IOReturn)status
 {
     NSUserNotification *notification = [[NSUserNotification alloc] init];
     if ( status == kIOReturnSuccess){

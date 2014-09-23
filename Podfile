@@ -3,6 +3,7 @@
 
 target "Zik Controller" do
 pod 'TBXML', '~> 1.5'
+pod 'AIObservable'
 end
 
 target "Zik ControllerTests" do
