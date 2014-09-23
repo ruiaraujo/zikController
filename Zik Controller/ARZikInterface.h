@@ -16,7 +16,6 @@ typedef NS_ENUM(NSInteger, ConnectionStatus) {
     CONNECTED
 };
 
-
 typedef NS_ENUM(NSInteger, OptionStatus) {
     ON,
     OFF,
@@ -42,18 +41,17 @@ typedef NS_ENUM(NSInteger, AngleEffect) {
     DEGREES_30,
 };
 
-
-@protocol ARBluetoothDelegate
--(void)zikConnectionComplete:(IOReturn)error;
--(void)newBatteryStatus:(BOOL)charging :(NSInteger)level;
+@protocol ARZikStatusObserver
+-(void)newZikConnectionStatus:(IOReturn)status;
+-(void)newBatteryStatus:(BOOL)charging level:(NSInteger)level;
 -(void)LouReedModeState:(OptionStatus)status;
 -(void)ActiveNoiseCancellationState:(OptionStatus)status;
 -(void)ConcertHallEffectState:(OptionStatus)status;
--(void)ConcertHallEffectState:(OptionStatus)status :(RoomSize)room :(AngleEffect)angle;
+-(void)ConcertHallEffectState:(OptionStatus)status room:(RoomSize)room angle:(AngleEffect)angle;
 -(void)ConcertHallEffectRoomSize:(RoomSize)room;
 -(void)ConcertHallEffectAngle:(AngleEffect)angle;
 -(void)EqualizerState:(OptionStatus)status;
--(void)EqualizerState:(OptionStatus)status :(NSUInteger)preset;
+-(void)EqualizerState:(OptionStatus)status preset:(NSUInteger)preset;
 -(void)EqualizerPreset:(NSUInteger)preset;
 @end
 
@@ -63,7 +61,6 @@ typedef NS_ENUM(NSInteger, AngleEffect) {
 }
 
 @property (strong, nonatomic) IOBluetoothRFCOMMChannel	*mRFCOMMChannel;
-@property (nonatomic, assign) id  delegate;
 @property (nonatomic, assign) ConnectionStatus connectionStatus;
 
 -(void)registerForNewDevices;
@@ -94,6 +91,10 @@ typedef NS_ENUM(NSInteger, AngleEffect) {
 
 
 -(BOOL)setEqualizerPreset:(NSUInteger)preset;
+
+
+- (void)addObserver:(id<ARZikStatusObserver>)observer;
+- (void)removeObserver:(id<ARZikStatusObserver>)observer;
 
 
 @end

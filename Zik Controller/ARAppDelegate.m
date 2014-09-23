@@ -257,7 +257,7 @@
     }
 }
 
--(void)ConcertHallEffectState:(OptionStatus)status :(RoomSize)room :(AngleEffect)angle
+-(void)ConcertHallEffectState:(OptionStatus)status room:(RoomSize)room angle:(AngleEffect)angle
 {
     [self ConcertHallEffectState:status];
     [self ConcertHallEffectRoomSize:room];
@@ -319,13 +319,13 @@
 }
 
 
--(void)EqualizerState:(OptionStatus)status :(NSUInteger)preset;
+-(void)EqualizerState:(OptionStatus)status preset:(NSUInteger)preset;
 {
     [self EqualizerState:status];
     [self EqualizerPreset:preset];
 }
 
-- (void)newBatteryStatus:(BOOL)charging :(NSInteger)level
+- (void)newBatteryStatus:(BOOL)charging level:(NSInteger)level
 {
     if (charging){
         [_batteryStatus setTitle:@"Zik Status: Charging"];

@@ -17,7 +17,11 @@
 #import <IOBluetoothUI/objc/IOBluetoothDeviceSelectorController.h>
 #import <TBXML/TBXML.h>
 
-#import "ZikApi.h"
+#import <AIObservable.h>
+#import <NSInvocation+AIConstructors.h>
+
+#import "ARZikApi.h"
+
 
 unsigned char ZikServiceClassUUID[] =	//0ef0f502-f0ee-46c9-986c-54ed027807fb
 {
@@ -36,9 +40,29 @@ void newDevice(void * refCon, IOBluetoothUserNotificationRef inRef, IOBluetoothO
 }
 
 
+@interface ARZikInterface ()
+@property (nonatomic, strong) AIObservable* observable;
+@end
+
+
 @implementation ARZikInterface
-@synthesize delegate;
 @synthesize connectionStatus;
+
+- (id)init {
+    if (self = [super init]) {
+        self.observable = [[AIObservable alloc] init];
+    }
+    return self;
+}
+
+
+- (void)addObserver:(id<ARZikStatusObserver>)observer {
+    [self.observable addObserver:observer];
+}
+
+- (void)removeObserver:(id<ARZikStatusObserver>)observer {
+    [self.observable removeObserver:observer];
+}
 
 -(void)registerForNewDevices
 {
@@ -250,9 +274,9 @@ void newDevice(void * refCon, IOBluetoothUserNotificationRef inRef, IOBluetoothO
 {
     [self ZikRequest:BATTERY_GET :nil];
     [self ZikRequest:SOUND_EFFECT_ENABLED_GET :nil];
-    [self ZikRequest:EQUALIZER_GET :nil];
     [self ZikRequest:NOISE_CANCELLATION_ENABLED_GET :nil];
     [self ZikRequest:CONCERT_HALL_GET :nil];
+    [self ZikRequest:EQUALIZER_GET :nil];
 }
 
 -(BOOL)setLouReedModeState:(BOOL)enabled
@@ -446,46 +470,91 @@ void newDevice(void * refCon, IOBluetoothUserNotificationRef inRef, IOBluetoothO
         if (!charging) {
             level = [[TBXML valueOfAttributeNamed:@"level" forElement:battery] integerValue];
         }
-        [delegate newBatteryStatus:charging :level];
+        NSInvocation* invocation = [NSInvocation invocationWithProtocol:@protocol(ARZikStatusObserver)
+                                                               selector:@selector(newBatteryStatus:level:)];
+        [invocation setArgument:&charging atIndex:2];
+        [invocation setArgument:&level atIndex:3];
+        [self.observable notifyObservers:invocation];
     } else if ( [path isEqualToString:SOUND_EFFECT_ENABLED_GET] ){
         TBXMLElement *battery = [TBXML childElementNamed:@"specific_mode" parentElement:[TBXML childElementNamed:@"audio" parentElement:tbxml.rootXMLElement]];
         NSString *status= [TBXML valueOfAttributeNamed:@"enabled" forElement:battery];
-        [delegate LouReedModeState:[ARZikInterface convertStatus:status]];
+        NSInvocation* invocation = [NSInvocation invocationWithProtocol:@protocol(ARZikStatusObserver)
+                                                               selector:@selector(LouReedModeState:)];
+        OptionStatus statusInt = [ARZikInterface convertStatus:status];
+        [invocation setArgument:&statusInt atIndex:2];
+        [self.observable notifyObservers:invocation];
     } else if ( [path isEqualToString:NOISE_CANCELLATION_ENABLED_GET] ){
         TBXMLElement *battery = [TBXML childElementNamed:@"noise_cancellation" parentElement:[TBXML childElementNamed:@"audio" parentElement:tbxml.rootXMLElement]];
         NSString *status= [TBXML valueOfAttributeNamed:@"enabled" forElement:battery];
-        [delegate ActiveNoiseCancellationState:[ARZikInterface convertStatus:status]];
+        NSInvocation* invocation = [NSInvocation invocationWithProtocol:@protocol(ARZikStatusObserver)
+                                                               selector:@selector(ActiveNoiseCancellationState:)];
+        OptionStatus statusInt = [ARZikInterface convertStatus:status];
+        [invocation setArgument:&statusInt atIndex:2];
+        [self.observable notifyObservers:invocation];
     } else if ( [path isEqualToString:CONCERT_HALL_ENABLED_GET] ){
         TBXMLElement *sound = [TBXML childElementNamed:@"sound_effect" parentElement:[TBXML childElementNamed:@"audio" parentElement:tbxml.rootXMLElement]];
         NSString *status= [TBXML valueOfAttributeNamed:@"enabled" forElement:sound];
-        [delegate ConcertHallEffectState:[ARZikInterface convertStatus:status]];
+        NSInvocation* invocation = [NSInvocation invocationWithProtocol:@protocol(ARZikStatusObserver)
+                                                               selector:@selector(ConcertHallEffectState:)];
+        OptionStatus statusInt = [ARZikInterface convertStatus:status];
+        [invocation setArgument:&statusInt atIndex:2];
     } else if ( [path isEqualToString:CONCERT_HALL_GET] ){
         TBXMLElement *sound = [TBXML childElementNamed:@"sound_effect" parentElement:[TBXML childElementNamed:@"audio" parentElement:tbxml.rootXMLElement]];
         NSString *status= [TBXML valueOfAttributeNamed:@"enabled" forElement:sound];
         NSString *room= [TBXML valueOfAttributeNamed:@"room_size" forElement:sound];
         NSString *angle= [TBXML valueOfAttributeNamed:@"angle" forElement:sound];
-        [delegate ConcertHallEffectState:[ARZikInterface convertStatus:status]:[ARZikInterface convertRoom:room] :[ARZikInterface convertAngle:angle]];
+        NSInvocation* invocation = [NSInvocation invocationWithProtocol:@protocol(ARZikStatusObserver)
+                                                               selector:@selector(ConcertHallEffectState:room :angle:)];
+        RoomSize roomInt = [ARZikInterface convertRoom:room];
+        OptionStatus statusInt = [ARZikInterface convertStatus:status];
+        AngleEffect angleInt = [ARZikInterface convertAngle:angle];
+        [invocation setArgument:&statusInt atIndex:2];
+        [invocation setArgument:&roomInt atIndex:3];
+        [invocation setArgument:&angleInt atIndex:4];
+        [self.observable notifyObservers:invocation];
     } else if ( [path isEqualToString:CONCERT_HALL_ROOM_GET] ){
         TBXMLElement *sound = [TBXML childElementNamed:@"sound_effect" parentElement:[TBXML childElementNamed:@"audio" parentElement:tbxml.rootXMLElement]];
         NSString *room= [TBXML valueOfAttributeNamed:@"room_size" forElement:sound];
-        [delegate ConcertHallEffectRoomSize:[ARZikInterface convertRoom:room]];
+        NSInvocation* invocation = [NSInvocation invocationWithProtocol:@protocol(ARZikStatusObserver)
+                                                               selector:@selector(ConcertHallEffectRoomSize:)];
+        RoomSize roomInt = [ARZikInterface convertRoom:room];
+        [invocation setArgument:&roomInt atIndex:2];
+        [self.observable notifyObservers:invocation];
     } else if ( [path isEqualToString:CONCERT_HALL_ANGLE_GET] ){
         TBXMLElement *sound = [TBXML childElementNamed:@"sound_effect" parentElement:[TBXML childElementNamed:@"audio" parentElement:tbxml.rootXMLElement]];
         NSString *angle= [TBXML valueOfAttributeNamed:@"angle" forElement:sound];
-        [delegate ConcertHallEffectAngle:[ARZikInterface convertAngle:angle]];
+        NSInvocation* invocation = [NSInvocation invocationWithProtocol:@protocol(ARZikStatusObserver)
+                                                               selector:@selector(ConcertHallEffectAngle:)];
+        AngleEffect angleInt = [ARZikInterface convertAngle:angle];
+        [invocation setArgument:&angleInt atIndex:2];
+        [self.observable notifyObservers:invocation];
     } else if ( [path isEqualToString:EQUALIZER_ENABLED_GET] ){
         TBXMLElement *equ = [TBXML childElementNamed:@"equalizer" parentElement:[TBXML childElementNamed:@"audio" parentElement:tbxml.rootXMLElement]];
         NSString *status= [TBXML valueOfAttributeNamed:@"enabled" forElement:equ];
-        [delegate EqualizerState:[ARZikInterface convertStatus:status]];
+        NSInvocation* invocation = [NSInvocation invocationWithProtocol:@protocol(ARZikStatusObserver)
+                                                               selector:@selector(EqualizerState:)];
+        OptionStatus statusInt = [ARZikInterface convertStatus:status];
+        [invocation setArgument:&statusInt atIndex:2];
+        [self.observable notifyObservers:invocation];
     } else if ( [path isEqualToString:EQUALIZER_GET] ){
         TBXMLElement *equ = [TBXML childElementNamed:@"equalizer" parentElement:[TBXML childElementNamed:@"audio" parentElement:tbxml.rootXMLElement]];
         NSString *status= [TBXML valueOfAttributeNamed:@"enabled" forElement:equ];
         NSString *preset= [TBXML valueOfAttributeNamed:@"preset_id" forElement:equ];
-        [delegate EqualizerState:[ARZikInterface convertStatus:status] :[preset integerValue]];
+        NSInvocation* invocation = [NSInvocation invocationWithProtocol:@protocol(ARZikStatusObserver)
+                                                               selector:@selector(EqualizerState:preset:)];
+        OptionStatus statusInt = [ARZikInterface convertStatus:status];
+        NSUInteger presetInt = [preset integerValue];
+        [invocation setArgument:&statusInt atIndex:2];
+        [invocation setArgument:&presetInt atIndex:3];
+        [self.observable notifyObservers:invocation];
     } else if ( [path isEqualToString:EQUALIZER_PRESET_ID_GET] ){
         TBXMLElement *equ = [TBXML childElementNamed:@"equalizer" parentElement:[TBXML childElementNamed:@"audio" parentElement:tbxml.rootXMLElement]];
         NSString *preset= [TBXML valueOfAttributeNamed:@"preset_id" forElement:equ];
-        [delegate EqualizerPreset:[preset integerValue]];
+        NSInvocation* invocation = [NSInvocation invocationWithProtocol:@protocol(ARZikStatusObserver)
+                                                               selector:@selector(EqualizerPreset:)];
+        NSUInteger presetInt = [preset integerValue];
+        [invocation setArgument:&presetInt atIndex:2];
+        [self.observable notifyObservers:invocation];
     }
     
 }
@@ -494,7 +563,11 @@ void newDevice(void * refCon, IOBluetoothUserNotificationRef inRef, IOBluetoothO
 {
     connectionStatus = DISCONNECTED;
     _mRFCOMMChannel = nil;
-    [delegate zikConnectionComplete:kIOReturnError];
+    NSInvocation* invocation = [NSInvocation invocationWithProtocol:@protocol(ARZikStatusObserver)
+                                                           selector:@selector(newZikConnectionStatus:)];
+    NSUInteger statusInt = kIOReturnError;
+    [invocation setArgument:&statusInt atIndex:2];
+    [self.observable notifyObservers:invocation];
 }
 
 -(void)connectionComplete:(IOReturn)status{
@@ -508,7 +581,11 @@ void newDevice(void * refCon, IOBluetoothUserNotificationRef inRef, IOBluetoothO
     } else {
         NSLog( @"Error: 0x%lx opening connection to device.\n", (unsigned long)status );
         connectionStatus = DISCONNECTED;
-        [delegate zikConnectionComplete:status];
+        NSInvocation* invocation = [NSInvocation invocationWithProtocol:@protocol(ARZikStatusObserver)
+                                                               selector:@selector(newZikConnectionStatus:)];
+        NSUInteger statusInt = kIOReturnError;
+        [invocation setArgument:&statusInt atIndex:2];
+        [self.observable notifyObservers:invocation];
     }
 }
 
@@ -525,7 +602,10 @@ void newDevice(void * refCon, IOBluetoothUserNotificationRef inRef, IOBluetoothO
     } else{
         connectionStatus = DISCONNECTED;
     }
-    [delegate zikConnectionComplete:error];
+    NSInvocation* invocation = [NSInvocation invocationWithProtocol:@protocol(ARZikStatusObserver)
+                                                           selector:@selector(newZikConnectionStatus:)];
+    [invocation setArgument:&error atIndex:2];
+    [self.observable notifyObservers:invocation];
     
 }
 - (void)rfcommChannelControlSignalsChanged:(IOBluetoothRFCOMMChannel*)rfcommChannel
