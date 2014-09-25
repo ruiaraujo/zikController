@@ -42,6 +42,7 @@ typedef NS_ENUM(NSInteger, AngleEffect) {
 };
 
 @protocol ARZikStatusObserver
+@optional
 -(void)newZikConnectionStatus:(IOReturn)status;
 -(void)newBatteryStatus:(BOOL)charging level:(NSInteger)level;
 -(void)LouReedModeState:(OptionStatus)status;
@@ -53,6 +54,13 @@ typedef NS_ENUM(NSInteger, AngleEffect) {
 -(void)EqualizerState:(OptionStatus)status;
 -(void)EqualizerState:(OptionStatus)status preset:(NSUInteger)preset;
 -(void)EqualizerPreset:(NSUInteger)preset;
+-(void)ANCPhoneCallState:(OptionStatus)status;
+-(void)AutoConnectionState:(OptionStatus)status;
+-(void)AutoPowerOffValue:(NSUInteger)value;
+-(void)AutoPowerOffValuesList:(NSArray*)list;
+-(void)HeadDetectionState:(OptionStatus)status;
+-(void)FriendlyName:(NSString*)name;
+-(void)FirmwareVersion:(NSString*)version;
 @end
 
 @interface ARZikInterface : NSObject<IOBluetoothRFCOMMChannelDelegate> {
@@ -63,11 +71,12 @@ typedef NS_ENUM(NSInteger, AngleEffect) {
 @property (strong, nonatomic) IOBluetoothRFCOMMChannel	*mRFCOMMChannel;
 @property (nonatomic, assign) ConnectionStatus connectionStatus;
 
++ (instancetype)instance;
+
 -(void)registerForNewDevices;
 // Connection Method:
 // returns TRUE if the connection was successful:
 - (BOOL)searchForZikInConnectedDevices;
-
 
 // returns TRUE if the connection was successful:
 - (BOOL)connectToZik;
@@ -77,7 +86,7 @@ typedef NS_ENUM(NSInteger, AngleEffect) {
 - (void)disconnectFromZik;
 
 -(void)refreshZikStatus;
-
+-(void)refreshZikSystemPreferences;
 
 //Functions to toggle the main functions
 -(BOOL)setLouReedModeState:(BOOL)enabled;
@@ -89,12 +98,20 @@ typedef NS_ENUM(NSInteger, AngleEffect) {
 -(BOOL)setConcertHallRoomSize:(RoomSize)room;
 -(BOOL)setConcertHallAngle:(AngleEffect)angle;
 
-
+//Configuration of the Equalizer //TODO: values configuration for the User
 -(BOOL)setEqualizerPreset:(NSUInteger)preset;
 
+//Minor settings
+-(BOOL)setANCPhoneInCall:(BOOL)enabled;
+-(BOOL)setAutoConnection:(BOOL)enabled;
+-(BOOL)setHeadDetection:(BOOL)enabled;
+
+-(BOOL)setAutoPowerOff:(NSUInteger)newValue;
+
+-(BOOL)getFriendlyName;
+-(BOOL)setFriendlyName:(NSString*)newName;
 
 - (void)addObserver:(id<ARZikStatusObserver>)observer;
 - (void)removeObserver:(id<ARZikStatusObserver>)observer;
-
 
 @end

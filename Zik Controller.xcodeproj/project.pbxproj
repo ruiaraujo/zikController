@@ -20,6 +20,7 @@
 		BBB648E819C4D1DB006A8D5B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BBB648E719C4D1DB006A8D5B /* Images.xcassets */; };
 		BBB648EB19C4D1DB006A8D5B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBB648E919C4D1DB006A8D5B /* Main.storyboard */; };
 		BBB648F719C4D1DB006A8D5B /* Zik_ControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BBB648F619C4D1DB006A8D5B /* Zik_ControllerTests.m */; };
+		BBE49FF219D2CB56006A898C /* AIObservable+ARZikController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBE49FF119D2CB56006A898C /* AIObservable+ARZikController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +84,8 @@
 		BBB648F019C4D1DB006A8D5B /* Zik ControllerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Zik ControllerTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBB648F519C4D1DB006A8D5B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BBB648F619C4D1DB006A8D5B /* Zik_ControllerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Zik_ControllerTests.m; sourceTree = "<group>"; };
+		BBE49FF019D2CB56006A898C /* AIObservable+ARZikController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AIObservable+ARZikController.h"; sourceTree = "<group>"; };
+		BBE49FF119D2CB56006A898C /* AIObservable+ARZikController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AIObservable+ARZikController.m"; sourceTree = "<group>"; };
 		D40BEE06BE744B4FA649EA8F /* Pods-Zik Controller.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Zik Controller.xcconfig"; path = "Pods/Pods-Zik Controller.xcconfig"; sourceTree = "<group>"; };
 		E1F843DA8907426E9F5BC25B /* libPods-Zik Controller.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Zik Controller.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -140,11 +143,15 @@
 		BBB648DC19C4D1DB006A8D5B /* Zik Controller */ = {
 			isa = PBXGroup;
 			children = (
+				BBE49FF019D2CB56006A898C /* AIObservable+ARZikController.h */,
+				BBE49FF119D2CB56006A898C /* AIObservable+ARZikController.m */,
+				BBB648E419C4D1DB006A8D5B /* ARAppDelegate.h */,
+				BBB648E519C4D1DB006A8D5B /* ARAppDelegate.m */,
 				BB0E775519CC23F4006E4258 /* ARPreferences.h */,
 				BB0E775619CC23F4006E4258 /* ARPreferences.m */,
 				BB0E775719CC23F4006E4258 /* ARPreferences.xib */,
-				BBB648E419C4D1DB006A8D5B /* ARAppDelegate.h */,
-				BBB648E519C4D1DB006A8D5B /* ARAppDelegate.m */,
+				BB9280F619C507FB00FAED16 /* ARZikApi.h */,
+				BB9280F719C507FB00FAED16 /* ARZikApi.m */,
 				BB9280F319C4E20000FAED16 /* ARZikInterface.h */,
 				BB9280F419C4E20000FAED16 /* ARZikInterface.m */,
 				BBB648E719C4D1DB006A8D5B /* Images.xcassets */,
@@ -153,8 +160,6 @@
 				BB008C3519C640CA0079CFB7 /* StartAtLoginController.m */,
 				BBB648DD19C4D1DB006A8D5B /* Supporting Files */,
 				BB9280F219C4D90E00FAED16 /* Zik Controller.entitlements */,
-				BB9280F619C507FB00FAED16 /* ARZikApi.h */,
-				BB9280F719C507FB00FAED16 /* ARZikApi.m */,
 			);
 			path = "Zik Controller";
 			sourceTree = "<group>";
@@ -364,6 +369,7 @@
 				BBB648E019C4D1DB006A8D5B /* main.m in Sources */,
 				BBB648E619C4D1DB006A8D5B /* ARAppDelegate.m in Sources */,
 				BB0E775819CC23F4006E4258 /* ARPreferences.m in Sources */,
+				BBE49FF219D2CB56006A898C /* AIObservable+ARZikController.m in Sources */,
 				BB008C3619C640CA0079CFB7 /* StartAtLoginController.m in Sources */,
 				BB9280F819C507FB00FAED16 /* ARZikApi.m in Sources */,
 			);

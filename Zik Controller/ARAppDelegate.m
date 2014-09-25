@@ -9,6 +9,7 @@
 #import "ARAppDelegate.h"
 #import <ServiceManagement/ServiceManagement.h>
 #import "StartAtLoginController.h"
+#import "ARPreferences.h"
 
 #define LOW_BATTERY_LEVEL_WARNING   5
 
@@ -19,8 +20,7 @@
 @implementation ARAppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-    _zikInterface = [[ARZikInterface alloc] init];
-    //_zikInterface.delegate = self;
+    _zikInterface = [ARZikInterface instance];
     [_zikInterface addObserver:self];
     //loginController = [[StartAtLoginController alloc] initWithIdentifier:@"com.doublecheck.zikcontroller.HelperApp"];
     [self setupStatusItem];
@@ -89,8 +89,20 @@
     //TODO rework this later.
     //_launchAtLogin = [menu addItemWithTitle:@"Launch at login" action:@selector(toggleLaunchAtLogin:) keyEquivalent:@""];
     //[_launchAtLogin setState:[loginController startAtLogin]];
+    [menu addItemWithTitle:@"Preferences.." action:@selector(openPreferences:) keyEquivalent:@""];
     [menu addItemWithTitle:@"Quit Zik Controller" action:@selector(terminate:) keyEquivalent:@""];
     self.statusItem.menu = menu;
+}
+
+-(void)openPreferences:(id)sender{
+    if ( preferenceWindow == nil){
+        preferenceWindow  = [[ARPreferences alloc] initWithWindowNibName:@"ARPreferences"];
+        [preferenceWindow setShouldCascadeWindows: NO];
+    }
+    [[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
+    [preferenceWindow showWindow:self];
+    [[preferenceWindow window] makeKeyAndOrderFront:self];
+
 }
 
 

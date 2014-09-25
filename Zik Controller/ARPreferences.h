@@ -7,16 +7,25 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "ARZikInterface.h"
 
-@interface ARPreferences : NSWindowController
+@class ARZikInterface;
+
+@interface ARPreferences : NSWindowController<ARZikStatusObserver>
 
 @property (weak) IBOutlet NSTextField *zikName;
 @property (weak) IBOutlet NSTextField *firmwareVersion;
 @property (weak) IBOutlet NSButton *ANCDuringCall;
 @property (weak) IBOutlet NSButton *autoConnection;
-@property (weak) IBOutlet NSButton *autoPowerOff;
 @property (weak) IBOutlet NSButton *autoPause;
+@property (weak) IBOutlet NSPopUpButton *autoPowerOff;
 @property (weak) IBOutlet NSButton *lauchAtLogin;
 
+
+@property (strong, nonatomic) ARZikInterface *zikInterface;
+
+
+- (IBAction)actionOnNameTextField:(id)sender;
+- (IBAction)autoPowerCheckboxHandler:(id)sender;
 
 @end
