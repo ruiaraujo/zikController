@@ -9,11 +9,9 @@
 #import <Cocoa/Cocoa.h>
 #import "ARZikInterface.h"
 
-@class StartAtLoginController;
 @class ARPreferences;
 
 @interface ARAppDelegate : NSObject <NSApplicationDelegate, ARZikStatusObserver, NSUserNotificationCenterDelegate> {
-    StartAtLoginController *loginController;
     ARPreferences *preferenceWindow;
 }
 
@@ -53,7 +51,6 @@
 @property (strong, nonatomic) NSMenuItem *crystalPreset;
 @property (strong, nonatomic) NSMenuItem *userPreset;
 
-@property (strong, nonatomic) ARZikInterface *zikInterface;
 
 @end
 

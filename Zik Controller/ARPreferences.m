@@ -7,8 +7,10 @@
 //
 
 #import "ARPreferences.h"
+#import "StartAtLoginController.h"
 
 @interface ARPreferences ()
+@property (retain, nonatomic) StartAtLoginController *loginController;
 @property (retain, nonatomic) NSArray* autoPowerValues;
 @property (retain, nonatomic) NSString* lastSavedName;
 @end
@@ -17,6 +19,7 @@
 
 - (void)windowDidLoad {
     [super windowDidLoad];
+    _loginController = [[StartAtLoginController alloc] initWithIdentifier:@"com.doublecheck.zikcontroller.HelperApp"];
     _zikInterface = [ARZikInterface instance];
     [_zikInterface addObserver:self];
     [_zikInterface refreshZikSystemPreferences];
@@ -28,6 +31,21 @@
     [_autoConnection setAction:@selector(handleCheckBoxs:)];
     [_autoPause setTarget:self];
     [_autoPause setAction:@selector(handleCheckBoxs:)];
+    [_launchAtLogin setTarget:self];
+    [_launchAtLogin setAction:@selector(toggleLaunchAtLogin:)];
+    [_launchAtLogin setState:[_loginController startAtLogin]];
+}
+
+
+- (void)toggleLaunchAtLogin:(id)sender
+{
+    if ([_launchAtLogin state] == YES) {
+        [_launchAtLogin setState:NO];
+    } else {
+        [_launchAtLogin setState:YES];
+    }
+    [_loginController setStartAtLogin:[_launchAtLogin state] == YES];
+    [_launchAtLogin setState: [_loginController startAtLogin]];
 }
 
 - (void)newZikConnectionStatus:(IOReturn)status

@@ -19,7 +19,7 @@
 @property (weak) IBOutlet NSButton *autoConnection;
 @property (weak) IBOutlet NSButton *autoPause;
 @property (weak) IBOutlet NSPopUpButton *autoPowerOff;
-@property (weak) IBOutlet NSButton *lauchAtLogin;
+@property (weak) IBOutlet NSButton *launchAtLogin;
 
 
 @property (strong, nonatomic) ARZikInterface *zikInterface;

@@ -8,21 +8,21 @@
 
 #import "ARAppDelegate.h"
 #import <ServiceManagement/ServiceManagement.h>
-#import "StartAtLoginController.h"
 #import "ARPreferences.h"
 
 #define LOW_BATTERY_LEVEL_WARNING   5
 
 @interface ARAppDelegate ()
-
+@property (strong, nonatomic) ARZikInterface *zikInterface;
+@property BOOL lowWarningBattery;
 @end
 
 @implementation ARAppDelegate
-
+@synthesize lowWarningBattery;
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     _zikInterface = [ARZikInterface instance];
     [_zikInterface addObserver:self];
-    //loginController = [[StartAtLoginController alloc] initWithIdentifier:@"com.doublecheck.zikcontroller.HelperApp"];
+    lowWarningBattery = false;
     [self setupStatusItem];
     [[NSUserNotificationCenter defaultUserNotificationCenter] setDelegate:self];
 }
@@ -86,9 +86,6 @@
     _crystalPreset = [_equalizerMenu addItemWithTitle:@"Crystal" action:@selector(configEqualizerPreset:) keyEquivalent:@""];
     _userPreset = [_equalizerMenu addItemWithTitle:@"User" action:@selector(configEqualizerPreset:) keyEquivalent:@""];
     [menu addItem:[NSMenuItem separatorItem]];
-    //TODO rework this later.
-    //_launchAtLogin = [menu addItemWithTitle:@"Launch at login" action:@selector(toggleLaunchAtLogin:) keyEquivalent:@""];
-    //[_launchAtLogin setState:[loginController startAtLogin]];
     [menu addItemWithTitle:@"Preferences.." action:@selector(openPreferences:) keyEquivalent:@""];
     [menu addItemWithTitle:@"Quit Zik Controller" action:@selector(terminate:) keyEquivalent:@""];
     self.statusItem.menu = menu;
@@ -106,16 +103,6 @@
 }
 
 
-- (void)toggleLaunchAtLogin:(id)sender
-{
-    if ([_launchAtLogin state] == YES) {
-        [_launchAtLogin setState:NO];
-    } else {
-        [_launchAtLogin setState:YES];
-    }
-    [loginController setStartAtLogin:[_launchAtLogin state] == YES];
-    [_launchAtLogin setState: [loginController startAtLogin]];
-}
 
 
 - (void)connect:(id)sender
@@ -157,6 +144,7 @@
         notification.informativeText = @"Parrot Zik connected.";
 
     } else {
+        lowWarningBattery = false;
         [_connectStatus setTitle:@"Connection: Disconnected"];
         _statusItem.toolTip = @"Zik Controller: Disconnected";
         [_connectItem setTitle:@"Connect"];
@@ -343,8 +331,13 @@
         [_batteryStatus setTitle:@"Zik Status: Charging"];
     } else {
         [_batteryStatus setTitle:[NSString stringWithFormat:@"Zik status: %ld%%", level]];
-        if ( level <= LOW_BATTERY_LEVEL_WARNING ) {
-            
+        if ( level <= LOW_BATTERY_LEVEL_WARNING && !lowWarningBattery) {
+            lowWarningBattery = true;
+            NSUserNotification *notification = [[NSUserNotification alloc] init];
+            notification.title = @"Zik Controller";
+            notification.informativeText = @"Low battery!!! Charge your Zik!";
+            notification.soundName = NSUserNotificationDefaultSoundName;
+            [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification:notification];
         }
     }
 }
