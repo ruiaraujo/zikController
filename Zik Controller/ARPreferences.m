@@ -21,8 +21,6 @@
     [super windowDidLoad];
     _loginController = [[StartAtLoginController alloc] initWithIdentifier:@"com.doublecheck.zikcontroller.HelperApp"];
     _zikInterface = [ARZikInterface instance];
-    [_zikInterface addObserver:self];
-    [_zikInterface refreshZikSystemPreferences];
     [[self window] center];
     [[self window] setReleasedWhenClosed:NO];
     [_ANCDuringCall setTarget:self];
@@ -34,7 +32,27 @@
     [_launchAtLogin setTarget:self];
     [_launchAtLogin setAction:@selector(toggleLaunchAtLogin:)];
     [_launchAtLogin setState:[_loginController startAtLogin]];
+    [_zikInterface addObserver:self];
+    if ([_zikInterface connectionStatus] == CONNECTED){
+        [_zikInterface refreshZikSystemPreferences];
+    } else {
+        [self enableZikUI:FALSE];
+    }
 }
+
+
+-(void)enableZikUI:(BOOL)enable
+{
+    if ( !enable ){
+        [_firmwareVersion setStringValue:@"Firmware Version: NA"];
+    }
+    [_ANCDuringCall setEnabled:enable];
+    [_autoPowerOff setEnabled:enable];
+    [_autoConnection setEnabled:enable];
+    [_autoPause setEnabled:enable];
+    [_zikName setEnabled:enable];
+}
+
 
 
 - (void)toggleLaunchAtLogin:(id)sender
@@ -51,7 +69,10 @@
 - (void)newZikConnectionStatus:(IOReturn)status
 {
     if ( status == kIOReturnSuccess){
+        [self enableZikUI:TRUE];
         [_zikInterface refreshZikSystemPreferences];
+    } else {
+        [self enableZikUI:FALSE];
     }
 }
 

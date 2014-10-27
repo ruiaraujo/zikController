@@ -44,7 +44,7 @@ typedef NS_ENUM(NSInteger, AngleEffect) {
 @protocol ARZikStatusObserver
 @optional
 -(void)newZikConnectionStatus:(IOReturn)status;
--(void)newBatteryStatus:(BOOL)charging level:(NSInteger)level;
+-(void)newBatteryStatus:(BOOL)charging level:(NSNumber*)level;
 -(void)LouReedModeState:(OptionStatus)status;
 -(void)ActiveNoiseCancellationState:(OptionStatus)status;
 -(void)ConcertHallEffectState:(OptionStatus)status;
@@ -66,6 +66,7 @@ typedef NS_ENUM(NSInteger, AngleEffect) {
 @interface ARZikInterface : NSObject<IOBluetoothRFCOMMChannelDelegate> {
     UInt8 rfcommChannelID;
     IOBluetoothDevice *selectedDevice;
+    IOBluetoothUserNotificationRef newDeviceNot;
 }
 
 @property (strong, nonatomic) IOBluetoothRFCOMMChannel	*mRFCOMMChannel;
@@ -74,6 +75,7 @@ typedef NS_ENUM(NSInteger, AngleEffect) {
 + (instancetype)instance;
 
 -(void)registerForNewDevices;
+-(void)unregisterForNewDevices;
 // Connection Method:
 // returns TRUE if the connection was successful:
 - (BOOL)searchForZikInConnectedDevices;

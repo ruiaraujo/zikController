@@ -29,9 +29,10 @@ static const unsigned char ZikServiceClassUUID[] =	//0ef0f502-f0ee-46c9-986c-54e
 
 void newDevice(void * refCon, IOBluetoothUserNotificationRef inRef, IOBluetoothObjectRef objectRef)
 {
-    NSLog(@"New device\n");
+    NSLog(@"Device connection change\n");
     ARZikInterface * interface = (__bridge id)refCon;
-    if ( interface.connectionStatus == DISCONNECTED ){
+    IOBluetoothDevice *bluetoothDevice =(__bridge id)objectRef;
+    if ( interface.connectionStatus == DISCONNECTED && [bluetoothDevice isConnected]){
         [interface searchForZikInConnectedDevices];
     }
 }
@@ -48,6 +49,8 @@ void newDevice(void * refCon, IOBluetoothUserNotificationRef inRef, IOBluetoothO
 - (id)init {
     if (self = [super init]) {
         self.observable = [[AIObservable alloc] init];
+        connectionStatus = DISCONNECTED;
+        newDeviceNot = NULL;
     }
     return self;
 }
@@ -71,7 +74,16 @@ void newDevice(void * refCon, IOBluetoothUserNotificationRef inRef, IOBluetoothO
 
 -(void)registerForNewDevices
 {
-    IOBluetoothRegisterForDeviceConnectNotifications(newDevice, (__bridge void*)self);
+    newDeviceNot = IOBluetoothRegisterForDeviceConnectNotifications(newDevice, (__bridge void*)self);
+}
+
+
+-(void)unregisterForNewDevices
+{
+    if (newDeviceNot != NULL){
+        IOBluetoothUserNotificationUnregister(newDeviceNot);
+        newDeviceNot = NULL;
+    }
 }
 
 // Connection Method:
@@ -133,11 +145,14 @@ void newDevice(void * refCon, IOBluetoothUserNotificationRef inRef, IOBluetoothO
     if (connectionStatus != DISCONNECTED){
         return FALSE;
     }
+    
+    connectionStatus = CONNECTING;
     // The device selector will provide UI to the end user to find a remote device
     deviceSelector = [IOBluetoothDeviceSelectorController deviceSelector];
     
     if ( deviceSelector == nil )
     {
+        connectionStatus = DISCONNECTED;
         NSLog( @"Error - unable to allocate IOBluetoothDeviceSelectorController.\n" );
         return FALSE;
     }
@@ -153,6 +168,7 @@ void newDevice(void * refCon, IOBluetoothUserNotificationRef inRef, IOBluetoothO
     // been validated to contain the specified service or the user has hit the cancel button.
     if ( [deviceSelector runModal] != kIOBluetoothUISuccess )
     {
+        connectionStatus = DISCONNECTED;
         NSLog( @"User has cancelled the device selection.\n" );
         return FALSE;    }
     
@@ -162,6 +178,7 @@ void newDevice(void * refCon, IOBluetoothUserNotificationRef inRef, IOBluetoothO
     
     if ( ( deviceArray == nil ) || ( [deviceArray count] == 0 ) )
     {
+        connectionStatus = DISCONNECTED;
         NSLog( @"Error - no selected device.  ***This should never happen.***\n" );
         return FALSE;
     }
@@ -177,6 +194,7 @@ void newDevice(void * refCon, IOBluetoothUserNotificationRef inRef, IOBluetoothO
     
     if ( serviceRecord == nil )
     {
+        connectionStatus = DISCONNECTED;
         NSLog( @"Error - no chat service in selected device.  ***This should never happen.***\n" );
         return FALSE;
     }
@@ -187,6 +205,7 @@ void newDevice(void * refCon, IOBluetoothUserNotificationRef inRef, IOBluetoothO
     // Check to make sure the service record actually had an RFCOMM channel ID
     if ( status != kIOReturnSuccess )
     {
+        connectionStatus = DISCONNECTED;
         NSLog( @"Error: 0x%lx getting RFCOMM channel ID from service.\n", (unsigned long)status );
         return FALSE;
     }
@@ -195,11 +214,10 @@ void newDevice(void * refCon, IOBluetoothUserNotificationRef inRef, IOBluetoothO
     // Just for fun we log its name:
     NSLog( @"Service selected '%@' - RFCOMM Channel ID = %d\n", [serviceRecord getServiceName], rfcommChannelID );
     
-    connectionStatus = CONNECTING;
     // Before we can open the RFCOMM channel, we need to open a connection to the device.
     // The openRFCOMMChannel... API probably should do this for us, but for now we have to
     // do it manually.
-    status = [selectedDevice openConnection:nil];
+    status = [selectedDevice openConnection:self];
     
     [self connectionComplete:status];
     //TODO: the async api call to open connection is not working
@@ -398,7 +416,7 @@ void newDevice(void * refCon, IOBluetoothUserNotificationRef inRef, IOBluetoothO
             return false;
     }
     return [self ZikRequest:CONCERT_HALL_ROOM_SET :roomArg];
-
+    
     
 }
 
@@ -517,7 +535,7 @@ void newDevice(void * refCon, IOBluetoothUserNotificationRef inRef, IOBluetoothO
     NSString *reply = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     NSLog(@"%@\n", reply);
     NSError *error;
-    TBXML * tbxml = [TBXML tbxmlWithXMLString:reply error:&error];
+    TBXML * tbxml = [TBXML newTBXMLWithXMLString:reply error:&error];
     if (error) {
         NSLog(@"%@ %@", [error localizedDescription], [error userInfo]);
         return;
@@ -534,11 +552,13 @@ void newDevice(void * refCon, IOBluetoothUserNotificationRef inRef, IOBluetoothO
         TBXMLElement *battery = [TBXML childElementNamed:@"battery" parentElement:[TBXML childElementNamed:@"system" parentElement:tbxml.rootXMLElement]];
         NSString *status= [TBXML valueOfAttributeNamed:@"state" forElement:battery];
         BOOL charging = [status isEqualToString:@"charging"];
-        NSInteger level = 0;
+        NSNumber *level = nil;
         if (!charging) {
-            level = [[TBXML valueOfAttributeNamed:@"level" forElement:battery] integerValue];
+            NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
+            [f setNumberStyle:NSNumberFormatterDecimalStyle];
+            level = [f numberFromString:[TBXML valueOfAttributeNamed:@"level" forElement:battery]];
         }
-    
+        
         [self.observable notifyObservers:@protocol(ARZikStatusObserver) selector:@selector(newBatteryStatus:level:) argCount:2 arguments:&charging,&level];
     } else if ( [path isEqualToString:SOUND_EFFECT_ENABLED_GET] ){
         TBXMLElement *audio = [TBXML childElementNamed:@"specific_mode" parentElement:[TBXML childElementNamed:@"audio" parentElement:tbxml.rootXMLElement]];
@@ -626,7 +646,7 @@ void newDevice(void * refCon, IOBluetoothUserNotificationRef inRef, IOBluetoothO
 }
 
 -(void)connectionComplete:(IOReturn)status{
-    IOBluetoothRFCOMMChannel            *localRFCOMMChannel;
+    IOBluetoothRFCOMMChannel *localRFCOMMChannel;
     if (status == kIOReturnSuccess){
         // Open the RFCOMM channel on the new device connection
         status = [selectedDevice openRFCOMMChannelAsync:&localRFCOMMChannel withChannelID:rfcommChannelID delegate:self];
@@ -657,19 +677,6 @@ void newDevice(void * refCon, IOBluetoothUserNotificationRef inRef, IOBluetoothO
     }
     [self.observable notifyObservers:@protocol(ARZikStatusObserver) selector:@selector(newZikConnectionStatus:) argCount:1 arguments:&error];
 }
-- (void)rfcommChannelControlSignalsChanged:(IOBluetoothRFCOMMChannel*)rfcommChannel
-{
-}
-- (void)rfcommChannelFlowControlChanged:(IOBluetoothRFCOMMChannel*)rfcommChannel
-{
-}
-- (void)rfcommChannelWriteComplete:(IOBluetoothRFCOMMChannel*)rfcommChannel refcon:(void*)refcon status:(IOReturn)error
-{
-}
-- (void)rfcommChannelQueueSpaceAvailable:(IOBluetoothRFCOMMChannel*)rfcommChannel
-{
-}
-
 
 
 @end

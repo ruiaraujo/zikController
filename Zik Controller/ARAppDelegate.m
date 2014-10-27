@@ -48,13 +48,8 @@
     NSMenu *menu = [[NSMenu alloc] init];
     [menu setAutoenablesItems:NO];
     _connectStatus = [menu addItemWithTitle:@"Connection: Disconnected" action:nil keyEquivalent:@""];
+    _connectItem = [menu addItemWithTitle:@"Connect" action:@selector(connect:) keyEquivalent:@""];
     [_connectStatus setEnabled:NO];
-    if ([_zikInterface searchForZikInConnectedDevices]) {
-        _connectItem = [menu addItemWithTitle:@"Connecting..." action:nil keyEquivalent:@""];
-    } else {
-        _connectItem = [menu addItemWithTitle:@"Connect" action:@selector(connect:) keyEquivalent:@""];
-    }
-    [_zikInterface registerForNewDevices];
     [menu addItem:[NSMenuItem separatorItem]];
     _batteryStatus = [menu addItemWithTitle:@"Zik Status" action:nil keyEquivalent:@""];
     [_batteryStatus setEnabled:NO];
@@ -89,6 +84,13 @@
     [menu addItemWithTitle:@"Preferences.." action:@selector(openPreferences:) keyEquivalent:@""];
     [menu addItemWithTitle:@"Quit Zik Controller" action:@selector(terminate:) keyEquivalent:@""];
     self.statusItem.menu = menu;
+    if ([_zikInterface searchForZikInConnectedDevices]) {
+        [_connectStatus setTitle:@"Connection: Connecting..."];
+    } else {
+        [self enableZikUI:FALSE];
+    }
+    [_zikInterface registerForNewDevices];
+
 }
 
 -(void)openPreferences:(id)sender{
@@ -99,10 +101,16 @@
     [[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
     [preferenceWindow showWindow:self];
     [[preferenceWindow window] makeKeyAndOrderFront:self];
-
+    
 }
 
-
+-(void)enableZikUI:(BOOL)enable
+{
+    [_LouReedModeItem setEnabled:enable];
+    [_ANCItem setEnabled:enable];
+    [_EquItem setEnabled:enable];
+    [_ConcertHallEffectItem setEnabled:enable];
+}
 
 
 - (void)connect:(id)sender
@@ -136,14 +144,15 @@
 {
     NSUserNotification *notification = [[NSUserNotification alloc] init];
     if ( status == kIOReturnSuccess){
+        [self enableZikUI:TRUE];
         [_connectStatus setTitle:@"Connection: Connected"];
         _statusItem.toolTip = @"Zik Controller: Connected";
         [_connectItem setTitle:@"Disconnect"];
         [_connectItem setAction:@selector(disconnect:)];
         [_zikInterface refreshZikStatus];
         notification.informativeText = @"Parrot Zik connected.";
-
     } else {
+        [self enableZikUI:false];
         lowWarningBattery = false;
         [_connectStatus setTitle:@"Connection: Disconnected"];
         _statusItem.toolTip = @"Zik Controller: Disconnected";
@@ -156,7 +165,7 @@
     notification.soundName = NSUserNotificationDefaultSoundName;
     [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification:notification];
     [_connectItem setEnabled:YES];
-
+    
 }
 
 -(void)LouReedModeState:(OptionStatus)status
@@ -225,7 +234,7 @@
             [_ConcertHall setState:YES];
             break;
     }
-
+    
 }
 -(void)ConcertHallEffectAngle:(AngleEffect)angle
 {
@@ -272,7 +281,7 @@
     } else {
         [_EquItem setState:NO];
         _EquItem.submenu = nil;
-
+        
     }
     if (status == INVALID_OFF || status == INVALID_ON) {
         [_EquItem setEnabled:NO];
@@ -325,19 +334,23 @@
     [self EqualizerPreset:preset];
 }
 
-- (void)newBatteryStatus:(BOOL)charging level:(NSInteger)level
+- (void)newBatteryStatus:(BOOL)charging level:(NSNumber*)level
 {
     if (charging){
         [_batteryStatus setTitle:@"Zik Status: Charging"];
     } else {
-        [_batteryStatus setTitle:[NSString stringWithFormat:@"Zik status: %ld%%", level]];
-        if ( level <= LOW_BATTERY_LEVEL_WARNING && !lowWarningBattery) {
-            lowWarningBattery = true;
-            NSUserNotification *notification = [[NSUserNotification alloc] init];
-            notification.title = @"Zik Controller";
-            notification.informativeText = @"Low battery!!! Charge your Zik!";
-            notification.soundName = NSUserNotificationDefaultSoundName;
-            [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification:notification];
+        if ( level == nil ){
+            [_batteryStatus setTitle:@"Zik Status: In use"];
+        } else{
+            [_batteryStatus setTitle:[NSString stringWithFormat:@"Zik status: %ld%%", [level integerValue]]];
+            if ( [level integerValue] <= LOW_BATTERY_LEVEL_WARNING && !lowWarningBattery) {
+                lowWarningBattery = true;
+                NSUserNotification *notification = [[NSUserNotification alloc] init];
+                notification.title = @"Zik Controller";
+                notification.informativeText = @"Low battery!!! Charge your Zik!";
+                notification.soundName = NSUserNotificationDefaultSoundName;
+                [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification:notification];
+            }
         }
     }
 }
@@ -486,7 +499,7 @@
         [_userPreset setState:NO];
         [pressedItem setState:YES];
     }
-
+    
     
 }
 
