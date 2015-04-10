@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6250" systemVersion="14A388b" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6250"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7531"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="ARPreferences">
@@ -12,7 +12,6 @@
                 <outlet property="autoPause" destination="vJ0-Tl-1ZN" id="dTY-yN-xzf"/>
                 <outlet property="autoPowerOff" destination="WW9-55-hba" id="qf9-kY-bfO"/>
                 <outlet property="firmwareVersion" destination="njd-RK-AZE" id="3gv-7Q-6zx"/>
-                <outlet property="lauchAtLogin" destination="USC-xz-j8O" id="h7y-V9-sb2"/>
                 <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
                 <outlet property="zikName" destination="d4l-Bh-fkO" id="FPg-rg-vrP"/>
             </connections>
@@ -22,21 +21,21 @@
         <window title="Zik Controller" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" animationBehavior="default" id="F0z-JX-Cv5">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="196" y="240" width="261" height="181"/>
+            <rect key="contentRect" x="196" y="240" width="261" height="165"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1177"/>
             <view key="contentView" id="se5-gp-TjO">
-                <rect key="frame" x="0.0" y="0.0" width="261" height="181"/>
+                <rect key="frame" x="0.0" y="-4" width="261" height="165"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BjL-cs-Hfv">
-                        <rect key="frame" x="18" y="103" width="130" height="18"/>
+                        <rect key="frame" x="18" y="87" width="130" height="18"/>
                         <buttonCell key="cell" type="check" title="ANC during a call" bezelStyle="regularSquare" imagePosition="left" inset="2" id="YYA-5l-kTx">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                     </button>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="njd-RK-AZE">
-                        <rect key="frame" x="18" y="157" width="225" height="17"/>
+                        <rect key="frame" x="18" y="141" width="225" height="17"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Firmware Version: NA" id="Oap-1D-kXM">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -44,7 +43,7 @@
                         </textFieldCell>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WeW-jL-y3E">
-                        <rect key="frame" x="18" y="130" width="44" height="17"/>
+                        <rect key="frame" x="18" y="114" width="44" height="17"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Name:" id="Co3-gz-AQV">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -52,7 +51,7 @@
                         </textFieldCell>
                     </textField>
                     <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d4l-Bh-fkO">
-                        <rect key="frame" x="81" y="127" width="160" height="22"/>
+                        <rect key="frame" x="81" y="111" width="160" height="22"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="9j8-6V-FX4">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -63,28 +62,21 @@
                         </connections>
                     </textField>
                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IdT-iz-9Sz">
-                        <rect key="frame" x="18" y="83" width="187" height="18"/>
+                        <rect key="frame" x="18" y="67" width="187" height="18"/>
                         <buttonCell key="cell" type="check" title="Bluetooth auto-connection" bezelStyle="regularSquare" imagePosition="left" inset="2" id="73s-pG-GCn">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                     </button>
                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vJ0-Tl-1ZN">
-                        <rect key="frame" x="18" y="63" width="127" height="18"/>
+                        <rect key="frame" x="18" y="47" width="127" height="18"/>
                         <buttonCell key="cell" type="check" title="Automatic Pause" bezelStyle="regularSquare" imagePosition="left" inset="2" id="WgP-fg-c0z">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                     </button>
-                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="USC-xz-j8O">
-                        <rect key="frame" x="18" y="9" width="117" height="18"/>
-                        <buttonCell key="cell" type="check" title="Launch at login" bezelStyle="regularSquare" imagePosition="left" inset="2" id="1vg-Gb-jug">
-                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                    </button>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2ka-Ft-q5Z">
-                        <rect key="frame" x="18" y="40" width="100" height="17"/>
+                        <rect key="frame" x="18" y="24" width="100" height="17"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Auto-power off:" id="DCz-o9-eVs">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -92,7 +84,7 @@
                         </textFieldCell>
                     </textField>
                     <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WW9-55-hba">
-                        <rect key="frame" x="122" y="33" width="122" height="26"/>
+                        <rect key="frame" x="122" y="17" width="122" height="26"/>
                         <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="VTD-9V-6Am">
                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="menu"/>
@@ -107,7 +99,7 @@
             <connections>
                 <outlet property="delegate" destination="-2" id="0bl-1N-AYu"/>
             </connections>
-            <point key="canvasLocation" x="460.5" y="320.5"/>
+            <point key="canvasLocation" x="460.5" y="312.5"/>
         </window>
     </objects>
 </document>

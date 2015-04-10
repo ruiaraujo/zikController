@@ -13,13 +13,6 @@
 
 @interface ARPreferences : NSWindowController<ARZikStatusObserver>
 
-@property (weak) IBOutlet NSTextField *zikName;
-@property (weak) IBOutlet NSTextField *firmwareVersion;
-@property (weak) IBOutlet NSButton *ANCDuringCall;
-@property (weak) IBOutlet NSButton *autoConnection;
-@property (weak) IBOutlet NSButton *autoPause;
-@property (weak) IBOutlet NSPopUpButton *autoPowerOff;
-@property (weak) IBOutlet NSButton *launchAtLogin;
 
 
 @property (strong, nonatomic) ARZikInterface *zikInterface;
