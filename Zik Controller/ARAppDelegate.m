@@ -39,7 +39,7 @@
     [_statusItem.image setTemplate:YES];
     _statusItem.alternateImage = [NSImage imageNamed:@"StatusItem-AlternateImage"];
     _statusItem.highlightMode = YES;
-    _statusItem.toolTip = @"Zik Controller: Disconnected";
+    _statusItem.toolTip = NSLocalizedString(@"Zik Controller: Disconnected", nil);
     [self setupMenu];
 }
 
@@ -47,21 +47,21 @@
 {
     NSMenu *menu = [[NSMenu alloc] init];
     [menu setAutoenablesItems:NO];
-    _connectStatus = [menu addItemWithTitle:@"Connection: Disconnected" action:nil keyEquivalent:@""];
-    _connectItem = [menu addItemWithTitle:@"Connect" action:@selector(connect:) keyEquivalent:@""];
+    _connectStatus = [menu addItemWithTitle:NSLocalizedString(@"Connection: Disconnected", nil) action:nil keyEquivalent:@""];
+    _connectItem = [menu addItemWithTitle:NSLocalizedString(@"Connect", nil) action:@selector(connect:) keyEquivalent:@""];
     [_connectStatus setEnabled:NO];
     [menu addItem:[NSMenuItem separatorItem]];
-    _batteryStatus = [menu addItemWithTitle:@"Zik Status" action:nil keyEquivalent:@""];
+    _batteryStatus = [menu addItemWithTitle:NSLocalizedString(@"Zik Status", nil) action:nil keyEquivalent:@""];
     [_batteryStatus setEnabled:NO];
-    _LouReedModeItem = [menu addItemWithTitle:@"Tuned by Lou Reed" action:@selector(toggleLouReedMode:) keyEquivalent:@""];
-    _ANCItem = [menu addItemWithTitle:@"Noise Cancellation" action:@selector(toggleANCMode:) keyEquivalent:@""];
-    _ConcertHallEffectItem =[menu addItemWithTitle:@"Concert Hall Effect" action:@selector(toggleConcertHallEffect:) keyEquivalent:@""];
+    _LouReedModeItem = [menu addItemWithTitle:NSLocalizedString(@"Tuned by Lou Reed", nil) action:@selector(toggleLouReedMode:) keyEquivalent:@""];
+    _ANCItem = [menu addItemWithTitle:NSLocalizedString(@"Noise Cancellation", nil) action:@selector(toggleANCMode:) keyEquivalent:@""];
+    _ConcertHallEffectItem =[menu addItemWithTitle:NSLocalizedString(@"Concert Hall Effect", nil) action:@selector(toggleConcertHallEffect:) keyEquivalent:@""];
     _concertHallMenu = [[NSMenu alloc] init];
-    [[_concertHallMenu addItemWithTitle:@"Room size" action:nil keyEquivalent:@""] setEnabled:NO];
-    _SilentRoom = [_concertHallMenu addItemWithTitle:@"Silent Room" action:@selector(configConcertHallRoomSize:) keyEquivalent:@""];
-    _LivingRoom = [_concertHallMenu addItemWithTitle:@"Living Room" action:@selector(configConcertHallRoomSize:) keyEquivalent:@""];
-    _JazzClub = [_concertHallMenu addItemWithTitle:@"Jazz Club" action:@selector(configConcertHallRoomSize:) keyEquivalent:@""];
-    _ConcertHall = [_concertHallMenu addItemWithTitle:@"Concert Hall" action:@selector(configConcertHallRoomSize:) keyEquivalent:@""];
+    [[_concertHallMenu addItemWithTitle:NSLocalizedString(@"Room size", nil) action:nil keyEquivalent:@""] setEnabled:NO];
+    _SilentRoom = [_concertHallMenu addItemWithTitle:NSLocalizedString(@"Silent Room", nil) action:@selector(configConcertHallRoomSize:) keyEquivalent:@""];
+    _LivingRoom = [_concertHallMenu addItemWithTitle:NSLocalizedString(@"Living Room", nil) action:@selector(configConcertHallRoomSize:) keyEquivalent:@""];
+    _JazzClub = [_concertHallMenu addItemWithTitle:NSLocalizedString(@"Jazz Club", nil) action:@selector(configConcertHallRoomSize:) keyEquivalent:@""];
+    _ConcertHall = [_concertHallMenu addItemWithTitle:NSLocalizedString(@"Concert Hall", nil) action:@selector(configConcertHallRoomSize:) keyEquivalent:@""];
     [_concertHallMenu addItem:[NSMenuItem separatorItem]];
     [[_concertHallMenu addItemWithTitle:@"Angle" action:nil keyEquivalent:@""] setEnabled:NO];
     _Degree_30 = [_concertHallMenu addItemWithTitle:@"30" action:@selector(configConcertHallAngle:) keyEquivalent:@""];
@@ -70,22 +70,22 @@
     _Degree_120 = [_concertHallMenu addItemWithTitle:@"120" action:@selector(configConcertHallAngle:) keyEquivalent:@""];
     _Degree_150 = [_concertHallMenu addItemWithTitle:@"150" action:@selector(configConcertHallAngle:) keyEquivalent:@""];
     _Degree_180 = [_concertHallMenu addItemWithTitle:@"180" action:@selector(configConcertHallAngle:) keyEquivalent:@""];
-    _EquItem =[menu addItemWithTitle:@"Equalizer" action:@selector(toggleEqualizer:) keyEquivalent:@""];
+    _EquItem =[menu addItemWithTitle:NSLocalizedString(@"Equalizer", nil) action:@selector(toggleEqualizer:) keyEquivalent:@""];
     _equalizerMenu = [[NSMenu alloc] init];
-    [[_equalizerMenu addItemWithTitle:@"Presets" action:nil keyEquivalent:@""] setEnabled:NO];
+    [[_equalizerMenu addItemWithTitle:NSLocalizedString(@"Presets", nil) action:nil keyEquivalent:@""] setEnabled:NO];
     _vocalPreset = [_equalizerMenu addItemWithTitle:@"Vocal" action:@selector(configEqualizerPreset:) keyEquivalent:@""];
     _popPreset = [_equalizerMenu addItemWithTitle:@"Pop" action:@selector(configEqualizerPreset:) keyEquivalent:@""];
     _clubPreset = [_equalizerMenu addItemWithTitle:@"Club" action:@selector(configEqualizerPreset:) keyEquivalent:@""];
     _punchyPreset = [_equalizerMenu addItemWithTitle:@"Punchy" action:@selector(configEqualizerPreset:) keyEquivalent:@""];
     _deepPreset = [_equalizerMenu addItemWithTitle:@"Deep" action:@selector(configEqualizerPreset:) keyEquivalent:@""];
     _crystalPreset = [_equalizerMenu addItemWithTitle:@"Crystal" action:@selector(configEqualizerPreset:) keyEquivalent:@""];
-    _userPreset = [_equalizerMenu addItemWithTitle:@"User" action:@selector(configEqualizerPreset:) keyEquivalent:@""];
+    _userPreset = [_equalizerMenu addItemWithTitle:NSLocalizedString(@"User", nil) action:@selector(configEqualizerPreset:) keyEquivalent:@""];
     [menu addItem:[NSMenuItem separatorItem]];
-    [menu addItemWithTitle:@"Preferences.." action:@selector(openPreferences:) keyEquivalent:@""];
-    [menu addItemWithTitle:@"Quit Zik Controller" action:@selector(terminate:) keyEquivalent:@""];
+    [menu addItemWithTitle:NSLocalizedString(@"Preferences..", nil) action:@selector(openPreferences:) keyEquivalent:@""];
+    [menu addItemWithTitle:NSLocalizedString(@"Quit Zik Controller", nil) action:@selector(terminate:) keyEquivalent:@""];
     self.statusItem.menu = menu;
     if ([_zikInterface searchForZikInConnectedDevices]) {
-        [_connectStatus setTitle:@"Connection: Connecting..."];
+        [_connectStatus setTitle:NSLocalizedString(@"Connection: Connecting...", nil)];
     } else {
         [self enableZikUI:FALSE];
     }
@@ -115,23 +115,23 @@
 
 - (void)connect:(id)sender
 {
-    [_connectItem setTitle:@"Connecting..."];
+    [_connectItem setTitle:NSLocalizedString(@"Connecting...", nil)];
     [_connectItem setEnabled:NO];
     if (![self.zikInterface connectToZik]) {
-        [_connectItem setTitle:@"Connect"];
+        [_connectItem setTitle:NSLocalizedString(@"Connect", nil)];
         [_connectItem setEnabled:YES];
     } else {
-        [_connectStatus setTitle:@"Connection: Connecting..."];
+        [_connectStatus setTitle:NSLocalizedString(@"Connection: Connecting...", nil)];
     }
 }
 
 - (void)disconnect:(id)sender
 {
-    [_connectStatus setTitle:@"Connection: Disconnected"];
-    _statusItem.toolTip = @"Zik Controller: Disconnected";
-    [_batteryStatus setTitle:@"Zik Status"];
+    [_connectStatus setTitle:NSLocalizedString(@"Connection: Disconnected", nil)];
+    _statusItem.toolTip = NSLocalizedString(@"Zik Controller: Disconnected", nil);
+    [_batteryStatus setTitle:NSLocalizedString(@"Zik Status", nil)];
     [self.zikInterface disconnectFromZik];
-    [_connectItem setTitle:@"Connect"];
+    [_connectItem setTitle:NSLocalizedString(@"Connect", nil)];
     [_connectItem setAction:@selector(connect:)];
 }
 
@@ -145,23 +145,23 @@
     NSUserNotification *notification = [[NSUserNotification alloc] init];
     if ( status == kIOReturnSuccess){
         [self enableZikUI:TRUE];
-        [_connectStatus setTitle:@"Connection: Connected"];
-        _statusItem.toolTip = @"Zik Controller: Connected";
-        [_connectItem setTitle:@"Disconnect"];
+        [_connectStatus setTitle:NSLocalizedString(@"Connection: Connected", nil)];
+        _statusItem.toolTip = NSLocalizedString(@"Zik Controller: Connected", nil);
+        [_connectItem setTitle:NSLocalizedString(@"Disconnect", nil)];
         [_connectItem setAction:@selector(disconnect:)];
         [_zikInterface refreshZikStatus];
-        notification.informativeText = @"Parrot Zik connected.";
+        notification.informativeText = NSLocalizedString(@"Parrot Zik connected.", nil);
     } else {
         [self enableZikUI:false];
         lowWarningBattery = false;
-        [_connectStatus setTitle:@"Connection: Disconnected"];
-        _statusItem.toolTip = @"Zik Controller: Disconnected";
-        [_connectItem setTitle:@"Connect"];
+        [_connectStatus setTitle:NSLocalizedString(@"Connection: Disconnected", nil)];
+        _statusItem.toolTip = NSLocalizedString(@"Zik Controller: Disconnected", nil);
+        [_connectItem setTitle:NSLocalizedString(@"Connect", nil)];
         [_connectItem setAction:@selector(connect:)];
-        [_batteryStatus setTitle:@"Zik Status"];
-        notification.informativeText = @"Parrot Zik disconnected.";
+        [_batteryStatus setTitle:NSLocalizedString(@"Zik Status", nil)];
+        notification.informativeText = NSLocalizedString(@"Parrot Zik disconnected.", nil);
     }
-    notification.title = @"Zik Controller";
+    notification.title = NSLocalizedString(@"Zik Controller", nil);
     notification.soundName = NSUserNotificationDefaultSoundName;
     [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification:notification];
     [_connectItem setEnabled:YES];
@@ -337,17 +337,17 @@
 - (void)newBatteryStatus:(BOOL)charging level:(NSNumber*)level
 {
     if (charging){
-        [_batteryStatus setTitle:@"Zik Status: Charging"];
+        [_batteryStatus setTitle:NSLocalizedString(@"Zik Status: Charging", nil)];
     } else {
         if ( level == nil ){
-            [_batteryStatus setTitle:@"Zik Status: In use"];
+            [_batteryStatus setTitle:NSLocalizedString(@"Zik Status: In use", nil)];
         } else{
-            [_batteryStatus setTitle:[NSString stringWithFormat:@"Zik status: %ld%%", [level integerValue]]];
+            [_batteryStatus setTitle:[NSString localizedStringWithFormat:NSLocalizedString(@"Zik status: %ld%%", nil), [level integerValue]]];
             if ( [level integerValue] <= LOW_BATTERY_LEVEL_WARNING && !lowWarningBattery) {
                 lowWarningBattery = true;
                 NSUserNotification *notification = [[NSUserNotification alloc] init];
-                notification.title = @"Zik Controller";
-                notification.informativeText = @"Low battery!!! Charge your Zik!";
+                notification.title = NSLocalizedString(@"Zik Controller", nil);
+                notification.informativeText = NSLocalizedString(@"Low battery!!! Charge your Zik!", nil);
                 notification.soundName = NSUserNotificationDefaultSoundName;
                 [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification:notification];
             }

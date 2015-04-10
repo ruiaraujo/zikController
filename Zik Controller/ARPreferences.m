@@ -45,7 +45,7 @@
 -(void)enableZikUI:(BOOL)enable
 {
     if ( !enable ){
-        [_firmwareVersion setStringValue:@"Firmware Version: NA"];
+        [_firmwareVersion setStringValue:NSLocalizedString(@"Firmware Version: NA", nil)];
     }
     [_ANCDuringCall setEnabled:enable];
     [_autoPowerOff setEnabled:enable];
@@ -130,7 +130,7 @@
     if ( [_autoPowerOff numberOfItems] == 0 )
         return; //Ignore for now
     if (value > 0) {
-        [_autoPowerOff selectItemWithTitle:[NSString stringWithFormat:@"%ld minutes", value]];
+        [_autoPowerOff selectItemWithTitle:[NSString localizedStringWithFormat:NSLocalizedString(@"%ld minutes", nil), value]];
     } else {
         [_autoPowerOff selectItemAtIndex:0];
     }
@@ -143,9 +143,9 @@
     for (id object in list) {
         NSNumber* value = object;
         if ( [value integerValue] == 0 ){
-            [_autoPowerOff addItemWithTitle:@"Disabled"];
+            [_autoPowerOff addItemWithTitle:NSLocalizedString(@"Disabled", nil)];
         } else {
-            [_autoPowerOff addItemWithTitle:[NSString stringWithFormat:@"%ld minutes", [value integerValue]] ];
+            [_autoPowerOff addItemWithTitle:[NSString localizedStringWithFormat:NSLocalizedString(@"%ld minutes", nil), [value integerValue]] ];
         }
     }
     if ( selectedIndex < [list count] && selectedIndex != -1 ){
@@ -183,6 +183,6 @@
 
 -(void)FirmwareVersion:(NSString*)version
 {
-    [_firmwareVersion setStringValue:[NSString stringWithFormat:@"Firmware Version: %@", version]];
+    [_firmwareVersion setStringValue:[NSString localizedStringWithFormat:NSLocalizedString(@"Firmware Version: %@", nil), version]];
 }
 @end
