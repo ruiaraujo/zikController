@@ -9,13 +9,16 @@
 /* Begin PBXBuildFile section */
 		A51EE4EB3E1D4399BB0C3F2E /* libPods-Zik Controller.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E1F843DA8907426E9F5BC25B /* libPods-Zik Controller.a */; };
 		BB0E775819CC23F4006E4258 /* ARPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = BB0E775619CC23F4006E4258 /* ARPreferences.m */; };
-		BB0E775919CC23F4006E4258 /* ARPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = BB0E775719CC23F4006E4258 /* ARPreferences.xib */; };
+		BB5E98261AD88A9800204645 /* ARPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = BB5E98281AD88A9800204645 /* ARPreferences.xib */; };
 		BB9280F519C4E20000FAED16 /* ARZikInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = BB9280F419C4E20000FAED16 /* ARZikInterface.m */; };
 		BB9280F819C507FB00FAED16 /* ARZikApi.m in Sources */ = {isa = PBXBuildFile; fileRef = BB9280F719C507FB00FAED16 /* ARZikApi.m */; };
 		BBB648E019C4D1DB006A8D5B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BBB648DF19C4D1DB006A8D5B /* main.m */; };
 		BBB648E619C4D1DB006A8D5B /* ARAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BBB648E519C4D1DB006A8D5B /* ARAppDelegate.m */; };
 		BBB648E819C4D1DB006A8D5B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BBB648E719C4D1DB006A8D5B /* Images.xcassets */; };
 		BBB648F719C4D1DB006A8D5B /* Zik_ControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BBB648F619C4D1DB006A8D5B /* Zik_ControllerTests.m */; };
+		BBB7CBC61AD96177001C315A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BBB7CBC81AD96177001C315A /* Localizable.strings */; };
+		BBB7CBCB1AD96177001C315A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BBB7CBCD1AD96177001C315A /* InfoPlist.strings */; };
+		BBB7CBD01AD96177001C315A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BBB7CBD21AD96177001C315A /* InfoPlist.strings */; };
 		BBE49FF219D2CB56006A898C /* AIObservable+ARZikController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBE49FF119D2CB56006A898C /* AIObservable+ARZikController.m */; };
 		BBF4698A1AD85F420079D8F2 /* Main.xib in Resources */ = {isa = PBXBuildFile; fileRef = BBF469891AD85F420079D8F2 /* Main.xib */; };
 /* End PBXBuildFile section */
@@ -48,7 +51,6 @@
 		45627B40C28C4079829B54FF /* Pods-Zik Controller.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Zik Controller.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Zik Controller/Pods-Zik Controller.debug.xcconfig"; sourceTree = "<group>"; };
 		BB0E775519CC23F4006E4258 /* ARPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARPreferences.h; sourceTree = "<group>"; };
 		BB0E775619CC23F4006E4258 /* ARPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARPreferences.m; sourceTree = "<group>"; };
-		BB0E775719CC23F4006E4258 /* ARPreferences.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ARPreferences.xib; sourceTree = "<group>"; };
 		BB9280F219C4D90E00FAED16 /* Zik Controller.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Zik Controller.entitlements"; sourceTree = "<group>"; };
 		BB9280F319C4E20000FAED16 /* ARZikInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARZikInterface.h; sourceTree = "<group>"; };
 		BB9280F419C4E20000FAED16 /* ARZikInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARZikInterface.m; sourceTree = "<group>"; };
@@ -63,6 +65,11 @@
 		BBB648F019C4D1DB006A8D5B /* Zik ControllerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Zik ControllerTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBB648F519C4D1DB006A8D5B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BBB648F619C4D1DB006A8D5B /* Zik_ControllerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Zik_ControllerTests.m; sourceTree = "<group>"; };
+		BBB7CBC71AD96177001C315A /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/Localizable.strings; sourceTree = "<group>"; };
+		BBB7CBCC1AD96177001C315A /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		BBB7CBD11AD96177001C315A /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		BBB7CBD51ADA5BC8001C315A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ARPreferences.xib; sourceTree = "<group>"; };
+		BBB7CBD91ADA7114001C315A /* pt */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = pt; path = pt.lproj/ARPreferences.xib; sourceTree = "<group>"; };
 		BBE49FF019D2CB56006A898C /* AIObservable+ARZikController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AIObservable+ARZikController.h"; sourceTree = "<group>"; };
 		BBE49FF119D2CB56006A898C /* AIObservable+ARZikController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AIObservable+ARZikController.m"; sourceTree = "<group>"; };
 		BBF469891AD85F420079D8F2 /* Main.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Main.xib; sourceTree = "<group>"; };
@@ -126,7 +133,7 @@
 				BBB648E519C4D1DB006A8D5B /* ARAppDelegate.m */,
 				BB0E775519CC23F4006E4258 /* ARPreferences.h */,
 				BB0E775619CC23F4006E4258 /* ARPreferences.m */,
-				BB0E775719CC23F4006E4258 /* ARPreferences.xib */,
+				BB5E98281AD88A9800204645 /* ARPreferences.xib */,
 				BB9280F619C507FB00FAED16 /* ARZikApi.h */,
 				BB9280F719C507FB00FAED16 /* ARZikApi.m */,
 				BB9280F319C4E20000FAED16 /* ARZikInterface.h */,
@@ -142,6 +149,8 @@
 		BBB648DD19C4D1DB006A8D5B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				BBB7CBD21AD96177001C315A /* InfoPlist.strings */,
+				BBB7CBC81AD96177001C315A /* Localizable.strings */,
 				BBB648DE19C4D1DB006A8D5B /* Info.plist */,
 				BBB648DF19C4D1DB006A8D5B /* main.m */,
 			);
@@ -160,6 +169,7 @@
 		BBB648F419C4D1DB006A8D5B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				BBB7CBCD1AD96177001C315A /* InfoPlist.strings */,
 				BBB648F519C4D1DB006A8D5B /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -246,6 +256,7 @@
 			knownRegions = (
 				en,
 				Base,
+				pt,
 			);
 			mainGroup = BBB648D119C4D1DB006A8D5B;
 			productRefGroup = BBB648DB19C4D1DB006A8D5B /* Products */;
@@ -264,8 +275,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				BBB648E819C4D1DB006A8D5B /* Images.xcassets in Resources */,
+				BBB7CBC61AD96177001C315A /* Localizable.strings in Resources */,
 				BBF4698A1AD85F420079D8F2 /* Main.xib in Resources */,
-				BB0E775919CC23F4006E4258 /* ARPreferences.xib in Resources */,
+				BB5E98261AD88A9800204645 /* ARPreferences.xib in Resources */,
+				BBB7CBD01AD96177001C315A /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -273,6 +286,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BBB7CBCB1AD96177001C315A /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -342,6 +356,42 @@
 			targetProxy = BBB648F119C4D1DB006A8D5B /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		BB5E98281AD88A9800204645 /* ARPreferences.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BBB7CBD51ADA5BC8001C315A /* en */,
+				BBB7CBD91ADA7114001C315A /* pt */,
+			);
+			name = ARPreferences.xib;
+			sourceTree = "<group>";
+		};
+		BBB7CBC81AD96177001C315A /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BBB7CBC71AD96177001C315A /* pt */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		BBB7CBCD1AD96177001C315A /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BBB7CBCC1AD96177001C315A /* pt */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		BBB7CBD21AD96177001C315A /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BBB7CBD11AD96177001C315A /* pt */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		BBB648F819C4D1DB006A8D5B /* Debug */ = {

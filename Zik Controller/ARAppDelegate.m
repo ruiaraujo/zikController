@@ -15,6 +15,43 @@
 @interface ARAppDelegate ()
 @property (strong, nonatomic) ARZikInterface *zikInterface;
 @property BOOL lowWarningBattery;
+
+
+@property (strong, nonatomic) NSStatusItem *statusItem;
+@property (strong, nonatomic) NSMenuItem *connectStatus;
+@property (strong, nonatomic) NSMenuItem *connectItem;
+@property (strong, nonatomic) NSMenuItem *batteryStatus;
+@property (strong, nonatomic) NSMenuItem *LouReedModeItem;
+@property (strong, nonatomic) NSMenuItem *ANCItem;
+@property (strong, nonatomic) NSMenuItem *EquItem;
+@property (strong, nonatomic) NSMenuItem *ConcertHallEffectItem;
+@property (strong, nonatomic) NSMenuItem *preferences;
+
+//Concert hall room types
+@property (strong, nonatomic) NSMenuItem *SilentRoom;
+@property (strong, nonatomic) NSMenuItem *LivingRoom;
+@property (strong, nonatomic) NSMenuItem *JazzClub;
+@property (strong, nonatomic) NSMenuItem *ConcertHall;
+
+//Concert hall room angle
+@property (strong, nonatomic) NSMenu *concertHallMenu;
+@property (strong, nonatomic) NSMenuItem *Degree_180;
+@property (strong, nonatomic) NSMenuItem *Degree_150;
+@property (strong, nonatomic) NSMenuItem *Degree_120;
+@property (strong, nonatomic) NSMenuItem *Degree_90;
+@property (strong, nonatomic) NSMenuItem *Degree_60;
+@property (strong, nonatomic) NSMenuItem *Degree_30;
+
+
+//Equalizer preset
+@property (strong, nonatomic) NSMenu *equalizerMenu;
+@property (strong, nonatomic) NSMenuItem *vocalPreset;
+@property (strong, nonatomic) NSMenuItem *popPreset;
+@property (strong, nonatomic) NSMenuItem *clubPreset;
+@property (strong, nonatomic) NSMenuItem *punchyPreset;
+@property (strong, nonatomic) NSMenuItem *deepPreset;
+@property (strong, nonatomic) NSMenuItem *crystalPreset;
+@property (strong, nonatomic) NSMenuItem *userPreset;
 @end
 
 @implementation ARAppDelegate
@@ -63,7 +100,7 @@
     _JazzClub = [_concertHallMenu addItemWithTitle:NSLocalizedString(@"Jazz Club", nil) action:@selector(configConcertHallRoomSize:) keyEquivalent:@""];
     _ConcertHall = [_concertHallMenu addItemWithTitle:NSLocalizedString(@"Concert Hall", nil) action:@selector(configConcertHallRoomSize:) keyEquivalent:@""];
     [_concertHallMenu addItem:[NSMenuItem separatorItem]];
-    [[_concertHallMenu addItemWithTitle:@"Angle" action:nil keyEquivalent:@""] setEnabled:NO];
+    [[_concertHallMenu addItemWithTitle:NSLocalizedString(@"Angle", nil) action:nil keyEquivalent:@""] setEnabled:NO];
     _Degree_30 = [_concertHallMenu addItemWithTitle:@"30" action:@selector(configConcertHallAngle:) keyEquivalent:@""];
     _Degree_60 = [_concertHallMenu addItemWithTitle:@"60" action:@selector(configConcertHallAngle:) keyEquivalent:@""];
     _Degree_90 = [_concertHallMenu addItemWithTitle:@"90" action:@selector(configConcertHallAngle:) keyEquivalent:@""];
@@ -81,7 +118,7 @@
     _crystalPreset = [_equalizerMenu addItemWithTitle:@"Crystal" action:@selector(configEqualizerPreset:) keyEquivalent:@""];
     _userPreset = [_equalizerMenu addItemWithTitle:NSLocalizedString(@"User", nil) action:@selector(configEqualizerPreset:) keyEquivalent:@""];
     [menu addItem:[NSMenuItem separatorItem]];
-    [menu addItemWithTitle:NSLocalizedString(@"Preferences..", nil) action:@selector(openPreferences:) keyEquivalent:@""];
+    _preferences = [menu addItemWithTitle:NSLocalizedString(@"Preferences..", nil) action:@selector(openPreferences:) keyEquivalent:@""];
     [menu addItemWithTitle:NSLocalizedString(@"Quit Zik Controller", nil) action:@selector(terminate:) keyEquivalent:@""];
     self.statusItem.menu = menu;
     if ([_zikInterface searchForZikInConnectedDevices]) {
@@ -110,6 +147,8 @@
     [_ANCItem setEnabled:enable];
     [_EquItem setEnabled:enable];
     [_ConcertHallEffectItem setEnabled:enable];
+    [_ConcertHallEffectItem setEnabled:enable];
+    [_preferences setEnabled:enable];
 }
 
 
