@@ -1,0 +1,23 @@
+{
+  "version": "1.0.0",
+  "name": "Zik Controller",
+  "launch_path": "/index.html",
+  "description": "Zik Controller for Mac",
+
+  "developer": {
+    "name": "Ângela Igreja",
+    "url": "www.angelaigreja.com"
+  },
+  "installs_allowed_from": [
+    "*"
+  ],
+  "default_locale": "en",
+  "permissions": {
+  },
+  "locales": {
+    "en": {
+      "name": "Zik Controller",
+      "description": "Zik Controller for Mac."
+    }
+  }
+}
